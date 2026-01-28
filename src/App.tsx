@@ -1,9 +1,14 @@
 import { motion } from 'framer-motion'
-import { Phone, Wrench, Clock, MapPin, Lightning, CheckCircle, Gauge, Drop, BatteryCharging, Hammer } from '@phosphor-icons/react'
+import { Phone, Wrench, Clock, MapPin, Lightning, CheckCircle, Gauge, Drop, BatteryCharging, Hammer, PaperPlaneRight } from '@phosphor-icons/react'
 import { Button } from '@/components/ui/button'
 import { Card } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
 import { Separator } from '@/components/ui/separator'
+import { Input } from '@/components/ui/input'
+import { Textarea } from '@/components/ui/textarea'
+import { Label } from '@/components/ui/label'
+import { toast } from 'sonner'
+import { useState } from 'react'
 
 function App() {
   const services = [
@@ -22,8 +27,50 @@ function App() {
     { icon: Lightning, title: 'Fast Response', description: 'Quick arrival times when you need help most' },
   ]
 
+  const [formData, setFormData] = useState({
+    name: '',
+    phone: '',
+    email: '',
+    year: '',
+    make: '',
+    model: '',
+    engine: '',
+    problem: ''
+  })
+
+  const [isSubmitting, setIsSubmitting] = useState(false)
+
   const handleCall = () => {
     window.location.href = 'tel:+1234567890'
+  }
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const { id, value } = e.target
+    setFormData(prev => ({ ...prev, [id]: value }))
+  }
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault()
+    setIsSubmitting(true)
+
+    await new Promise(resolve => setTimeout(resolve, 1000))
+
+    toast.success('Request received!', {
+      description: 'We\'ll contact you shortly to discuss your vehicle needs.'
+    })
+
+    setFormData({
+      name: '',
+      phone: '',
+      email: '',
+      year: '',
+      make: '',
+      model: '',
+      engine: '',
+      problem: ''
+    })
+
+    setIsSubmitting(false)
   }
 
   return (
@@ -176,59 +223,196 @@ function App() {
       <Separator />
 
       <section id="contact" className="py-16 md:py-24 px-6 bg-muted/30">
-        <div className="max-w-4xl mx-auto text-center">
+        <div className="max-w-4xl mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5 }}
           >
-            <h2 className="font-[family-name:var(--font-space)] font-bold text-3xl md:text-4xl text-foreground mb-4 tracking-tight">
-              Get in Touch
-            </h2>
-            <p className="text-muted-foreground text-lg mb-8">
-              Need automotive assistance? We're here to help 24/7
-            </p>
+            <div className="text-center mb-12">
+              <h2 className="font-[family-name:var(--font-space)] font-bold text-3xl md:text-4xl text-foreground mb-4 tracking-tight">
+                Contact Us
+              </h2>
+              <p className="text-muted-foreground text-lg mb-6">
+                Fill out the form below and we'll get back to you as soon as possible
+              </p>
+              <div className="flex items-center justify-center gap-3 mb-2">
+                <Phone weight="duotone" size={28} className="text-accent" />
+                <span className="text-sm text-muted-foreground">Or call us directly at</span>
+              </div>
+              <a 
+                href="tel:+1234567890" 
+                className="text-2xl font-[family-name:var(--font-space)] font-bold text-accent hover:text-accent/80 transition-colors"
+              >
+                (123) 456-7890
+              </a>
+            </div>
 
             <Card className="p-8 md:p-12 border-border">
-              <div className="space-y-8">
-                <div>
-                  <div className="flex items-center justify-center gap-3 mb-3">
-                    <Phone weight="duotone" size={32} className="text-accent" />
-                    <h3 className="font-[family-name:var(--font-space)] font-semibold text-2xl text-foreground">
-                      Call Us Anytime
-                    </h3>
+              <form onSubmit={handleSubmit} className="space-y-6">
+                <div className="grid md:grid-cols-2 gap-6">
+                  <div className="space-y-2">
+                    <Label htmlFor="name" className="font-[family-name:var(--font-space)] font-semibold">
+                      Full Name *
+                    </Label>
+                    <Input
+                      id="name"
+                      required
+                      placeholder="John Doe"
+                      value={formData.name}
+                      onChange={handleInputChange}
+                      className="font-[family-name:var(--font-inter)]"
+                    />
                   </div>
-                  <a 
-                    href="tel:+1234567890" 
-                    className="text-3xl md:text-4xl font-[family-name:var(--font-space)] font-bold text-accent hover:text-accent/80 transition-colors"
-                  >
-                    (123) 456-7890
-                  </a>
+
+                  <div className="space-y-2">
+                    <Label htmlFor="phone" className="font-[family-name:var(--font-space)] font-semibold">
+                      Phone Number *
+                    </Label>
+                    <Input
+                      id="phone"
+                      type="tel"
+                      required
+                      placeholder="(123) 456-7890"
+                      value={formData.phone}
+                      onChange={handleInputChange}
+                      className="font-[family-name:var(--font-inter)]"
+                    />
+                  </div>
+                </div>
+
+                <div className="space-y-2">
+                  <Label htmlFor="email" className="font-[family-name:var(--font-space)] font-semibold">
+                    Email Address *
+                  </Label>
+                  <Input
+                    id="email"
+                    type="email"
+                    required
+                    placeholder="john@example.com"
+                    value={formData.email}
+                    onChange={handleInputChange}
+                    className="font-[family-name:var(--font-inter)]"
+                  />
                 </div>
 
                 <Separator />
 
-                <div className="grid md:grid-cols-2 gap-6 text-left">
-                  <div>
-                    <h4 className="font-[family-name:var(--font-space)] font-semibold text-lg mb-2 text-foreground">
-                      Email
-                    </h4>
-                    <a 
-                      href="mailto:service@greenwoods.com" 
-                      className="text-muted-foreground hover:text-accent transition-colors"
-                    >
-                      service@greenwoods.com
-                    </a>
+                <div>
+                  <h3 className="font-[family-name:var(--font-space)] font-semibold text-lg mb-4 text-foreground">
+                    Vehicle Information
+                  </h3>
+                  <div className="grid md:grid-cols-2 gap-6">
+                    <div className="space-y-2">
+                      <Label htmlFor="year" className="font-[family-name:var(--font-space)] font-semibold">
+                        Year *
+                      </Label>
+                      <Input
+                        id="year"
+                        required
+                        placeholder="2020"
+                        value={formData.year}
+                        onChange={handleInputChange}
+                        className="font-[family-name:var(--font-inter)]"
+                      />
+                    </div>
+
+                    <div className="space-y-2">
+                      <Label htmlFor="make" className="font-[family-name:var(--font-space)] font-semibold">
+                        Make *
+                      </Label>
+                      <Input
+                        id="make"
+                        required
+                        placeholder="Toyota"
+                        value={formData.make}
+                        onChange={handleInputChange}
+                        className="font-[family-name:var(--font-inter)]"
+                      />
+                    </div>
+
+                    <div className="space-y-2">
+                      <Label htmlFor="model" className="font-[family-name:var(--font-space)] font-semibold">
+                        Model *
+                      </Label>
+                      <Input
+                        id="model"
+                        required
+                        placeholder="Camry"
+                        value={formData.model}
+                        onChange={handleInputChange}
+                        className="font-[family-name:var(--font-inter)]"
+                      />
+                    </div>
+
+                    <div className="space-y-2">
+                      <Label htmlFor="engine" className="font-[family-name:var(--font-space)] font-semibold">
+                        Engine
+                      </Label>
+                      <Input
+                        id="engine"
+                        placeholder="2.5L 4-Cylinder"
+                        value={formData.engine}
+                        onChange={handleInputChange}
+                        className="font-[family-name:var(--font-inter)]"
+                      />
+                    </div>
                   </div>
-                  <div>
-                    <h4 className="font-[family-name:var(--font-space)] font-semibold text-lg mb-2 text-foreground">
-                      Service Area
-                    </h4>
-                    <p className="text-muted-foreground">
-                      Greater Metro Area & Surrounding Communities
-                    </p>
-                  </div>
+                </div>
+
+                <div className="space-y-2">
+                  <Label htmlFor="problem" className="font-[family-name:var(--font-space)] font-semibold">
+                    Problem Description *
+                  </Label>
+                  <Textarea
+                    id="problem"
+                    required
+                    placeholder="Please describe the issue you're experiencing with your vehicle..."
+                    value={formData.problem}
+                    onChange={handleInputChange}
+                    className="min-h-32 font-[family-name:var(--font-inter)] resize-none"
+                  />
+                </div>
+
+                <Button 
+                  type="submit" 
+                  size="lg" 
+                  disabled={isSubmitting}
+                  className="w-full bg-accent hover:bg-accent/90 text-accent-foreground font-[family-name:var(--font-space)] font-bold text-lg tracking-wide uppercase gap-3"
+                >
+                  {isSubmitting ? (
+                    <>Sending...</>
+                  ) : (
+                    <>
+                      <PaperPlaneRight weight="bold" size={24} />
+                      Submit Request
+                    </>
+                  )}
+                </Button>
+              </form>
+
+              <Separator className="my-8" />
+
+              <div className="grid md:grid-cols-2 gap-6 text-center md:text-left">
+                <div>
+                  <h4 className="font-[family-name:var(--font-space)] font-semibold text-lg mb-2 text-foreground">
+                    Email
+                  </h4>
+                  <a 
+                    href="mailto:service@greenwoods.com" 
+                    className="text-muted-foreground hover:text-accent transition-colors"
+                  >
+                    service@greenwoods.com
+                  </a>
+                </div>
+                <div>
+                  <h4 className="font-[family-name:var(--font-space)] font-semibold text-lg mb-2 text-foreground">
+                    Service Area
+                  </h4>
+                  <p className="text-muted-foreground">
+                    Greater Metro Area & Surrounding Communities
+                  </p>
                 </div>
               </div>
             </Card>
