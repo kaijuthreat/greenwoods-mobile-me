@@ -10,6 +10,7 @@ const projectRoot = process.env.PROJECT_ROOT || import.meta.dirname
 
 // https://vite.dev/config/
 export default defineConfig({
+  base: '/', // custom domain / user site — serve assets from site root
   plugins: [
     react(),
     tailwindcss(),
