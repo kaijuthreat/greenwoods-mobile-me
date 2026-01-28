@@ -1,0 +1,68 @@
+name: Build and deploy to GitHub Pages
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: '3.2'
+
+      - name: Install dependencies (Bundler / Gems)
+        run: |
+          if [ -f Gemfile ]; then
+            gem install bundler --no-document
+            bundle config set path 'vendor/bundle'
+            bundle install --jobs 4 --retry 3
+          else
+            gem install bundler --no-document
+            gem install github-pages --no-document
+          fi
+
+      - name: Build site with Jekyll
+        run: |
+          if [ -f Gemfile ]; then
+            bundle exec jekyll build --destination ./_site
+          else
+            jekyll build --destination ./_site
+          fi
+
+      - name: Add CNAME to built site
+        run: |
+          echo "Inspecting _site ownership:"
+          ls -la ./_site || true
+          echo "greenwoodmobilemechanic.com" | sudo tee ./_site/CNAME > /dev/null
+          echo "Wrote CNAME; listing _site:"
+          ls -la ./_site || true
+
+      - name: Configure Pages
+        uses: actions/configure-pages@v3
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v1
+        with:
+          path: ./_site
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+
+    steps:
+      - name: Deploy to GitHub Pages
+        uses: actions/deploy-pages@v1
