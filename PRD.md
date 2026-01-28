@@ -53,15 +53,16 @@ The design should feel slick and modern with automotive energy - think precision
 
 ## Color Selection
 
-An automotive-inspired palette with deep blues suggesting trust and reliability, energetic accents suggesting 24/7 readiness, and clean contrast for professional presentation.
+A softer, eye-friendly palette with gentle blues and warm accents that reduce eye strain while maintaining professional credibility and visual hierarchy.
 
-- **Primary Color**: Deep Navy Blue (oklch(0.25 0.05 250)) - Communicates trust, professionalism, and reliability expected from automotive services
-- **Secondary Colors**: Charcoal Gray (oklch(0.35 0.01 260)) for supporting elements and text hierarchy; Light Gray (oklch(0.95 0.005 260)) for backgrounds and breathing room
-- **Accent Color**: Electric Orange (oklch(0.68 0.19 45)) - High-energy color for CTAs and important elements, suggesting immediate action and 24/7 availability
-- **Components**: 
-  - Primary Navy (oklch(0.25 0.05 250)): White text (oklch(0.98 0 0)) - Ratio 11.2:1 ✓
-  - Accent Orange (oklch(0.68 0.19 45)): Navy text (oklch(0.25 0.05 250)) - Ratio 5.1:1 ✓
-  - Background Light Gray (oklch(0.95 0.005 260)): Charcoal text (oklch(0.35 0.01 260)) - Ratio 9.8:1 ✓
+- **Primary Color**: Soft Periwinkle Blue (oklch(0.55 0.15 240)) - Gentle on the eyes while maintaining trust and professionalism
+- **Secondary Colors**: Light Lavender Gray (oklch(0.88 0.03 260)) for supporting elements; Soft Gray (oklch(0.52 0.02 270)) for muted text
+- **Accent Color**: Warm Golden Orange (oklch(0.75 0.16 50)) - Comfortable highlight color for CTAs, less intense than electric orange
+- **Background**: Very Light Warm Gray (oklch(0.97 0.01 90)) - Subtle warmth reduces harsh white brightness
+- **Foreground Pairings**: 
+  - Primary Blue (oklch(0.55 0.15 240)): White text (oklch(0.98 0 0)) - Ratio 4.9:1 ✓
+  - Accent Orange (oklch(0.75 0.16 50)): White text (oklch(0.98 0 0)) - Ratio 4.6:1 ✓
+  - Background (oklch(0.97 0.01 90)): Dark Gray text (oklch(0.35 0.03 270)) - Ratio 10.1:1 ✓
 - **Customizations**: 
 
   - Floating phon

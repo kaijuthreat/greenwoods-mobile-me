@@ -218,14 +218,14 @@ function App() {
             transition={{ duration: 0.6 }}
             className="max-w-4xl"
           >
-            <Badge className="mb-6 bg-accent/20 text-accent border-accent/30 hover:bg-accent/30 font-[family-name:var(--font-space)] font-semibold uppercase tracking-wider">
+            <Badge className="mb-6 bg-primary/15 text-primary border-primary/30 hover:bg-primary/20 font-[family-name:var(--font-space)] font-semibold uppercase tracking-wider">
               <Clock weight="bold" size={16} className="mr-1.5" />
               24/7 Available
             </Badge>
-            <h1 className="font-[family-name:var(--font-space)] font-bold text-4xl md:text-5xl lg:text-6xl text-primary-foreground leading-none tracking-tight mb-6">
+            <h1 className="font-[family-name:var(--font-space)] font-bold text-4xl md:text-5xl lg:text-6xl text-foreground leading-none tracking-tight mb-6">
               Expert Mobile Mechanic Services, Anytime, Anywhere
             </h1>
-            <p className="text-lg md:text-xl text-primary-foreground/90 leading-relaxed mb-8 max-w-2xl">
+            <p className="text-lg md:text-xl text-foreground/80 leading-relaxed mb-8 max-w-2xl">
               Professional automotive repair and maintenance that comes to you. Fast, reliable, and always available when you need us most.
             </p>
             <div className="flex flex-col sm:flex-row gap-4">
@@ -236,7 +236,7 @@ function App() {
               <Button 
                 size="lg" 
                 variant="outline" 
-                className="border-primary-foreground/30 text-primary-foreground hover:bg-primary-foreground/10 font-[family-name:var(--font-space)] font-semibold"
+                className="border-primary/30 text-primary hover:bg-primary/10 font-[family-name:var(--font-space)] font-semibold"
                 onClick={() => document.getElementById('services')?.scrollIntoView({ behavior: 'smooth' })}
               >
                 View Services
@@ -386,11 +386,11 @@ function App() {
                             {item.category}
                           </Badge>
                         </div>
-                        <div className="absolute bottom-0 left-0 right-0 p-4 text-primary-foreground">
+                        <div className="absolute bottom-0 left-0 right-0 p-4 text-white">
                           <h3 className="font-[family-name:var(--font-space)] font-bold text-lg mb-1">
                             {item.title}
                           </h3>
-                          <p className="text-sm text-primary-foreground/90 line-clamp-2">
+                          <p className="text-sm text-white/90 line-clamp-2">
                             {item.description}
                           </p>
                         </div>
@@ -737,14 +737,14 @@ function App() {
         <div className="max-w-7xl mx-auto text-center">
           <div className="flex items-center justify-center gap-3 mb-4">
             <div className="w-10 h-10 rounded-full bg-accent flex items-center justify-center">
-              <Wrench className="text-accent-foreground" size={24} weight="bold" />
+              <Wrench className="text-white" size={24} weight="bold" />
             </div>
             <div className="text-left">
               <h3 className="font-[family-name:var(--font-space)] font-bold text-lg leading-none">Greenwood's</h3>
-              <p className="text-xs text-primary-foreground/80">24 Hour Mobile Mechanic Services</p>
+              <p className="text-xs opacity-90">24 Hour Mobile Mechanic Services</p>
             </div>
           </div>
-          <p className="text-sm text-primary-foreground/70">
+          <p className="text-sm opacity-80">
             © {new Date().getFullYear()} Greenwood's Mobile Mechanic Services. All rights reserved.
           </p>
         </div>
