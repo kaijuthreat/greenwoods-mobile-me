@@ -2,7 +2,7 @@
 
 A sleek, modern landing page for Greenwood's 24 Hour Mobile Mechanic Services that communicates reliability, professionalism, and immediate availability for automotive services.
 
-**Experience Qualities**: 
+2. **Accessible** - Inform
 1. **Trustworthy** - The design must communicate reliability and professionalism to instill confidence in emergency automotive situations
 2. **Accessible** - Information hierarchy should make it effortless to find contact details and services, particularly for stressed customers with vehicle trouble
 3. **Bold** - Visual presentation should feel contemporary and energetic, breaking away from typical garage aesthetics while maintaining automotive credibility
@@ -10,9 +10,9 @@ A sleek, modern landing page for Greenwood's 24 Hour Mobile Mechanic Services th
 **Complexity Level**: Content Showcase (information-focused)
 This is a marketing landing page that presents business information, services, and contact methods without requiring complex state management or interactive features beyond basic navigation.
 
-## Essential Features
+- Progression: User l
 
-**Hero Section with Call-to-Action**
+**Services Showcase**
 - Functionality: Displays company name, tagline, and primary contact button prominently
 - Purpose: Immediately communicate availability and enable quick contact for emergency situations
 - Trigger: Page load
@@ -26,28 +26,21 @@ This is a marketing landing page that presents business information, services, a
 - Progression: User scrolls → reads service categories with icons → understands shop capabilities
 - Success criteria: Services are scannable, clearly labeled with relevant icons, organized logically
 
-**Contact Section**
+**Work Gallery**
 - Functionality: Displays phone number, email, and service area information
-- Purpose: Provide multiple contact methods for customer convenience
+- Trigger: User scrolls to gallery section
 - Trigger: User scrolls to bottom or clicks contact CTA
 - Progression: User needs contact info → scrolls to contact section → finds phone/email/location details
 - Success criteria: Contact information is easy to read and copy, phone number is tappable on mobile
 
 **Why Choose Us Section**
-- Functionality: Highlights key differentiators (24/7, mobile service, experience, etc.)
+- **Quick load times**: Optimize images and assets since users may be on slow mobile con
 - Purpose: Build trust and differentiate from competitors
-- Trigger: User scrolls through page
+
 - Progression: User reads service info → sees differentiators → gains confidence in choosing this service
 - Success criteria: Benefits are concise, compelling, and visually distinct
 
-**Work Gallery**
-- Functionality: Displays completed repair work in an image grid with modal view
-- Purpose: Build credibility by showcasing actual work and demonstrate expertise across different repair types
-- Trigger: User scrolls to gallery section
-- Progression: User sees thumbnail grid → clicks image → views full-size modal with details → closes modal to view more
-- Success criteria: Images load quickly, thumbnails are visually appealing with overlay text, modal provides clear detailed view
 
-## Edge Case Handling
 
 - **Mobile-first responsiveness**: Design adapts seamlessly from mobile to desktop since many customers will access while stranded with vehicle issues
 - **High contrast for readability**: Ensure text remains legible even in bright sunlight conditions (outdoor viewing scenario)
@@ -65,13 +58,13 @@ An automotive-inspired palette with deep blues suggesting trust and reliability,
 - **Primary Color**: Deep Navy Blue (oklch(0.25 0.05 250)) - Communicates trust, professionalism, and reliability expected from automotive services
 - **Secondary Colors**: Charcoal Gray (oklch(0.35 0.01 260)) for supporting elements and text hierarchy; Light Gray (oklch(0.95 0.005 260)) for backgrounds and breathing room
 - **Accent Color**: Electric Orange (oklch(0.68 0.19 45)) - High-energy color for CTAs and important elements, suggesting immediate action and 24/7 availability
-- **Foreground/Background Pairings**: 
+- **Components**: 
   - Primary Navy (oklch(0.25 0.05 250)): White text (oklch(0.98 0 0)) - Ratio 11.2:1 ✓
   - Accent Orange (oklch(0.68 0.19 45)): Navy text (oklch(0.25 0.05 250)) - Ratio 5.1:1 ✓
   - Background Light Gray (oklch(0.95 0.005 260)): Charcoal text (oklch(0.35 0.01 260)) - Ratio 9.8:1 ✓
-  - White Background (oklch(0.98 0 0)): Primary Navy (oklch(0.25 0.05 250)) - Ratio 11.2:1 ✓
+- **Customizations**: 
 
-## Font Selection
+  - Floating phon
 
 Typography should convey modern professionalism with mechanical precision - a contemporary sans-serif that feels technical yet approachable, avoiding overly industrial or heavy typefaces in favor of clean geometric forms.
 
@@ -89,16 +82,15 @@ Animations should suggest precision and motion, like well-tuned machinery - use 
 ## Component Selection
 
 - **Components**: 
-  - Card (shadcn) for service items and gallery thumbnails with custom hover effects using Tailwind transform and shadow utilities
-  - Dialog (shadcn) for gallery image modal view with full-size image display
+  - Card (shadcn) for service items with custom hover effects using Tailwind transform and shadow utilities
   - Button (shadcn) for CTAs, styled with the orange accent and size variants (default for secondary, lg for primary hero CTA)
-  - Badge (shadcn) for "24/7 Available" indicator and gallery category tags with custom accent styling
+  - Badge (shadcn) for "24/7 Available" indicator with custom accent styling
   - Separator (shadcn) between major sections with subtle styling
-- **Customizations**: 
+
   - Hero gradient background using custom CSS with navy-to-charcoal gradient and diagonal stripe pattern overlay
-  - Service cards with custom icon containers (circular backgrounds with accent color)
+
   - Floating phone CTA button (fixed position on mobile) using Button component with custom positioning
-- **States**: 
+
   - Buttons: default (solid accent), hover (darker orange with slight scale), active (even darker with scale down), focus (ring in accent color)
   - Cards: default (subtle shadow), hover (elevated shadow with slight translate-y transform), focus (visible ring)
   - Links: underline on hover with transition
@@ -108,19 +100,17 @@ Animations should suggest precision and motion, like well-tuned machinery - use 
   - MapPin (mobile service/location)
   - Phone (contact CTA)
   - Lightning (quick response)
-  - CheckCircle (benefits/features)
+
   - Engine/Gear (automotive services)
-  - Images (gallery section)
 - **Spacing**: 
   - Section padding: py-16 md:py-24 for generous vertical spacing
   - Container max-width: max-w-7xl mx-auto px-6 for content containment
   - Grid gaps: gap-6 md:gap-8 for service cards
   - Element spacing: space-y-4 for text stacks, space-y-8 for major groupings
 - **Mobile**: 
-  - Hero: Stack title and CTA vertically, reduce font sizes (H1 to 40px)
+
   - Services: Single column grid on mobile, 2 columns on md, 3 columns on lg
-  - Gallery: Single column grid on mobile, 2 columns on md, 3 columns on lg with touch-optimized card taps
   - Navigation: Simple header with logo and phone button, no complex nav needed
   - Fixed phone button: Show on mobile only (sticky bottom-right) for easy access while scrolling
-  - Touch targets: Minimum 44px height for all interactive elements
+
   - Reduced spacing: py-12 on mobile vs py-24 on desktop for sections
