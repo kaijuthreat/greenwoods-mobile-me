@@ -20,12 +20,16 @@ jobs:
         uses: actions/jekyll-build-pages@v1
         # (existing inputs, if any, will be preserved by this action)
 
-      - name: Add CNAME to built site
-        # Jekyll outputs to _site; ensure the CNAME is present in the published artifact
-        run: |
-          echo "greenwoodmobilemechanic.com" > ./_site/CNAME
-          echo "Added CNAME to _site:"
-          ls -la ./_site | sed -n '1,200p'
+     - name: Make _site writable and add CNAME
+  run: |
+    echo "Before chown:"
+    ls -la _site | sed -n '1,200p'
+    sudo chown -R $(id -u):$(id -g) ./_site
+    echo "After chown:"
+    ls -la _site | sed -n '1,200p'
+    echo "greenwoodmobilemechanic.com" > ./_site/CNAME
+    echo "Wrote CNAME; final listing:"
+    ls -la _site | sed -n '1,200p'
 
       - name: Configure Pages
         uses: actions/configure-pages@v3
