@@ -13,6 +13,7 @@ permissions:
 concurrency:
   group: "pages"
   cancel-in-progress: false
+    branches: [ main ] # build & deploy on pushes to main
 
 jobs:
   build:
@@ -36,6 +37,12 @@ jobs:
 
       - name: Build with Vite
         run: npm run build
+
+      - name: Add CNAME to dist
+        run: echo "greenwoodmobilemechanic.com" > ./dist/CNAME
+
+      - name: Configure Pages
+        uses: actions/configure-pages@v3
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
