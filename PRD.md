@@ -40,6 +40,13 @@ This is a marketing landing page that presents business information, services, a
 - Progression: User reads service info → sees differentiators → gains confidence in choosing this service
 - Success criteria: Benefits are concise, compelling, and visually distinct
 
+**Work Gallery**
+- Functionality: Displays completed repair work in an image grid with modal view
+- Purpose: Build credibility by showcasing actual work and demonstrate expertise across different repair types
+- Trigger: User scrolls to gallery section
+- Progression: User sees thumbnail grid → clicks image → views full-size modal with details → closes modal to view more
+- Success criteria: Images load quickly, thumbnails are visually appealing with overlay text, modal provides clear detailed view
+
 ## Edge Case Handling
 
 - **Mobile-first responsiveness**: Design adapts seamlessly from mobile to desktop since many customers will access while stranded with vehicle issues
@@ -82,9 +89,10 @@ Animations should suggest precision and motion, like well-tuned machinery - use 
 ## Component Selection
 
 - **Components**: 
-  - Card (shadcn) for service items with custom hover effects using Tailwind transform and shadow utilities
+  - Card (shadcn) for service items and gallery thumbnails with custom hover effects using Tailwind transform and shadow utilities
+  - Dialog (shadcn) for gallery image modal view with full-size image display
   - Button (shadcn) for CTAs, styled with the orange accent and size variants (default for secondary, lg for primary hero CTA)
-  - Badge (shadcn) for "24/7 Available" indicator with custom accent styling
+  - Badge (shadcn) for "24/7 Available" indicator and gallery category tags with custom accent styling
   - Separator (shadcn) between major sections with subtle styling
 - **Customizations**: 
   - Hero gradient background using custom CSS with navy-to-charcoal gradient and diagonal stripe pattern overlay
@@ -102,6 +110,7 @@ Animations should suggest precision and motion, like well-tuned machinery - use 
   - Lightning (quick response)
   - CheckCircle (benefits/features)
   - Engine/Gear (automotive services)
+  - Images (gallery section)
 - **Spacing**: 
   - Section padding: py-16 md:py-24 for generous vertical spacing
   - Container max-width: max-w-7xl mx-auto px-6 for content containment
@@ -110,6 +119,7 @@ Animations should suggest precision and motion, like well-tuned machinery - use 
 - **Mobile**: 
   - Hero: Stack title and CTA vertically, reduce font sizes (H1 to 40px)
   - Services: Single column grid on mobile, 2 columns on md, 3 columns on lg
+  - Gallery: Single column grid on mobile, 2 columns on md, 3 columns on lg with touch-optimized card taps
   - Navigation: Simple header with logo and phone button, no complex nav needed
   - Fixed phone button: Show on mobile only (sticky bottom-right) for easy access while scrolling
   - Touch targets: Minimum 44px height for all interactive elements

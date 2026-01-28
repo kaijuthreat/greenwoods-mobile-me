@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion'
-import { Phone, Wrench, Clock, MapPin, Lightning, CheckCircle, Gauge, Drop, BatteryCharging, Hammer, PaperPlaneRight } from '@phosphor-icons/react'
+import { Phone, Wrench, Clock, MapPin, Lightning, CheckCircle, Gauge, Drop, BatteryCharging, Hammer, PaperPlaneRight, Images } from '@phosphor-icons/react'
 import { Button } from '@/components/ui/button'
 import { Card } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
@@ -7,6 +7,7 @@ import { Separator } from '@/components/ui/separator'
 import { Input } from '@/components/ui/input'
 import { Textarea } from '@/components/ui/textarea'
 import { Label } from '@/components/ui/label'
+import { Dialog, DialogContent, DialogTrigger } from '@/components/ui/dialog'
 import { toast } from 'sonner'
 import { useState } from 'react'
 
@@ -39,6 +40,53 @@ function App() {
   })
 
   const [isSubmitting, setIsSubmitting] = useState(false)
+
+  const galleryImages = [
+    {
+      id: 1,
+      title: 'Engine Overhaul',
+      description: 'Complete engine rebuild on 2018 Ford F-150',
+      category: 'Engine Work',
+      image: 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="800" height="600"%3E%3Crect fill="%23f3f4f6" width="800" height="600"/%3E%3Cpath fill="%234b5563" d="M300 200h200v200h-200z"/%3E%3Ccircle fill="%236b7280" cx="400" cy="300" r="60"/%3E%3Crect fill="%239ca3af" x="350" y="240" width="100" height="40"/%3E%3Ctext x="400" y="450" font-family="Arial" font-size="24" fill="%234b5563" text-anchor="middle"%3EEngine Overhaul%3C/text%3E%3C/svg%3E'
+    },
+    {
+      id: 2,
+      title: 'Brake System Replacement',
+      description: 'Full brake pad and rotor replacement on Honda Civic',
+      category: 'Brake Service',
+      image: 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="800" height="600"%3E%3Crect fill="%23e0e7ff" width="800" height="600"/%3E%3Ccircle fill="%234f46e5" cx="400" cy="300" r="100"/%3E%3Ccircle fill="%23312e81" cx="400" cy="300" r="60"/%3E%3Cpath fill="%236366f1" d="M340 300h120M400 240v120"/%3E%3Ctext x="400" y="450" font-family="Arial" font-size="24" fill="%234f46e5" text-anchor="middle"%3EBrake System%3C/text%3E%3C/svg%3E'
+    },
+    {
+      id: 3,
+      title: 'Transmission Service',
+      description: 'Transmission fluid change and diagnostics on Toyota Camry',
+      category: 'Transmission',
+      image: 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="800" height="600"%3E%3Crect fill="%23fef3c7" width="800" height="600"/%3E%3Crect fill="%23d97706" x="300" y="250" width="80" height="100" rx="10"/%3E%3Crect fill="%23f59e0b" x="420" y="250" width="80" height="100" rx="10"/%3E%3Crect fill="%23fbbf24" x="360" y="200" width="80" height="80" rx="10"/%3E%3Ctext x="400" y="450" font-family="Arial" font-size="24" fill="%23d97706" text-anchor="middle"%3ETransmission%3C/text%3E%3C/svg%3E'
+    },
+    {
+      id: 4,
+      title: 'Electrical Diagnostics',
+      description: 'Complete electrical system diagnostic and repair',
+      category: 'Electrical',
+      image: 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="800" height="600"%3E%3Crect fill="%23dbeafe" width="800" height="600"/%3E%3Cpath fill="%232563eb" d="M400 150l-60 150h50l-40 150 110-180h-60z"/%3E%3Ccircle fill="none" stroke="%233b82f6" stroke-width="4" cx="400" cy="300" r="120"/%3E%3Ctext x="400" y="520" font-family="Arial" font-size="24" fill="%232563eb" text-anchor="middle"%3EElectrical Systems%3C/text%3E%3C/svg%3E'
+    },
+    {
+      id: 5,
+      title: 'Oil Change & Filter',
+      description: 'Synthetic oil change with premium filter on BMW 3 Series',
+      category: 'Maintenance',
+      image: 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="800" height="600"%3E%3Crect fill="%23f0fdf4" width="800" height="600"/%3E%3Cellipse fill="%2316a34a" cx="400" cy="280" rx="80" ry="40"/%3E%3Crect fill="%2322c55e" x="360" y="280" width="80" height="120"/%3E%3Cellipse fill="%2316a34a" cx="400" cy="400" rx="80" ry="40"/%3E%3Ctext x="400" y="480" font-family="Arial" font-size="24" fill="%2316a34a" text-anchor="middle"%3EOil Change%3C/text%3E%3C/svg%3E'
+    },
+    {
+      id: 6,
+      title: 'Suspension Repair',
+      description: 'Front suspension struts and alignment on Jeep Cherokee',
+      category: 'Suspension',
+      image: 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="800" height="600"%3E%3Crect fill="%23fce7f3" width="800" height="600"/%3E%3Crect fill="%23db2777" x="280" y="200" width="40" height="200" rx="20"/%3E%3Crect fill="%23db2777" x="480" y="200" width="40" height="200" rx="20"/%3E%3Ccircle fill="%23ec4899" cx="300" cy="420" r="40"/%3E%3Ccircle fill="%23ec4899" cx="500" cy="420" r="40"/%3E%3Ctext x="400" y="520" font-family="Arial" font-size="24" fill="%23db2777" text-anchor="middle"%3ESuspension Repair%3C/text%3E%3C/svg%3E'
+    }
+  ]
+
+  const [selectedImage, setSelectedImage] = useState<typeof galleryImages[0] | null>(null)
 
   const handleCall = () => {
     window.location.href = 'tel:+1234567890'
@@ -216,6 +264,95 @@ function App() {
                 </motion.div>
               )
             })}
+          </div>
+        </div>
+      </section>
+
+      <Separator />
+
+      <section id="gallery" className="py-16 md:py-24 px-6">
+        <div className="max-w-7xl mx-auto">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
+            className="text-center mb-12"
+          >
+            <div className="flex items-center justify-center gap-3 mb-4">
+              <Images size={32} weight="duotone" className="text-accent" />
+            </div>
+            <h2 className="font-[family-name:var(--font-space)] font-bold text-3xl md:text-4xl text-foreground mb-4 tracking-tight">
+              Our Work Gallery
+            </h2>
+            <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
+              Take a look at some of our recent repair and maintenance projects
+            </p>
+          </motion.div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+            {galleryImages.map((item, index) => (
+              <motion.div
+                key={item.id}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: index * 0.1 }}
+              >
+                <Dialog>
+                  <DialogTrigger asChild>
+                    <Card 
+                      className="overflow-hidden cursor-pointer group border-border hover:shadow-xl transition-all duration-300 hover:-translate-y-1"
+                      onClick={() => setSelectedImage(item)}
+                    >
+                      <div className="relative aspect-[4/3] overflow-hidden bg-muted">
+                        <img 
+                          src={item.image} 
+                          alt={item.title}
+                          className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                        />
+                        <div className="absolute inset-0 bg-gradient-to-t from-foreground/80 via-foreground/20 to-transparent opacity-60 group-hover:opacity-80 transition-opacity duration-300" />
+                        <div className="absolute top-4 right-4">
+                          <Badge className="bg-accent text-accent-foreground border-0 font-[family-name:var(--font-space)] font-semibold">
+                            {item.category}
+                          </Badge>
+                        </div>
+                        <div className="absolute bottom-0 left-0 right-0 p-4 text-primary-foreground">
+                          <h3 className="font-[family-name:var(--font-space)] font-bold text-lg mb-1">
+                            {item.title}
+                          </h3>
+                          <p className="text-sm text-primary-foreground/90 line-clamp-2">
+                            {item.description}
+                          </p>
+                        </div>
+                      </div>
+                    </Card>
+                  </DialogTrigger>
+                  <DialogContent className="max-w-4xl p-0 overflow-hidden border-border">
+                    <div className="relative">
+                      <img 
+                        src={item.image} 
+                        alt={item.title}
+                        className="w-full h-auto max-h-[70vh] object-contain bg-muted"
+                      />
+                      <div className="absolute top-4 right-4">
+                        <Badge className="bg-accent text-accent-foreground border-0 font-[family-name:var(--font-space)] font-semibold text-base px-4 py-1.5">
+                          {item.category}
+                        </Badge>
+                      </div>
+                    </div>
+                    <div className="p-6 md:p-8">
+                      <h3 className="font-[family-name:var(--font-space)] font-bold text-2xl md:text-3xl mb-3 text-foreground">
+                        {item.title}
+                      </h3>
+                      <p className="text-muted-foreground text-lg leading-relaxed">
+                        {item.description}
+                      </p>
+                    </div>
+                  </DialogContent>
+                </Dialog>
+              </motion.div>
+            ))}
           </div>
         </div>
       </section>
