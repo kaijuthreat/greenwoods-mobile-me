@@ -10,6 +10,10 @@ const projectRoot = process.env.PROJECT_ROOT || import.meta.dirname
 
 // https://vite.dev/config/
 export default defineConfig({
+  // Set base path for GitHub Pages
+  // With custom domain (CNAME), this should be '/'
+  // Without custom domain, it would be '/greenwoods-mobile-me/'
+  base: '/',
   plugins: [
     react(),
     tailwindcss(),
