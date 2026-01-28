@@ -27,6 +27,9 @@ jobs:
       - name: Build
         run: npm run build
 
+      - name: Add CNAME to dist
+        run: echo "greenwoodmobilemechanic.com" > ./dist/CNAME
+
       - name: Configure Pages
         uses: actions/configure-pages@v3
 
