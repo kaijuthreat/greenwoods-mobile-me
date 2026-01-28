@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion'
-import { Phone, Wrench, Clock, MapPin, Lightning, CheckCircle, Gauge, Drop, BatteryCharging, Hammer, PaperPlaneRight, Images } from '@phosphor-icons/react'
+import { Phone, Wrench, Clock, MapPin, Lightning, CheckCircle, Gauge, Drop, BatteryCharging, Hammer, PaperPlaneRight, Images, Star, Quotes } from '@phosphor-icons/react'
 import { Button } from '@/components/ui/button'
 import { Card } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
@@ -8,6 +8,7 @@ import { Input } from '@/components/ui/input'
 import { Textarea } from '@/components/ui/textarea'
 import { Label } from '@/components/ui/label'
 import { Dialog, DialogContent, DialogTrigger } from '@/components/ui/dialog'
+import { Avatar, AvatarFallback } from '@/components/ui/avatar'
 import { toast } from 'sonner'
 import { useState } from 'react'
 
@@ -87,6 +88,74 @@ function App() {
   ]
 
   const [selectedImage, setSelectedImage] = useState<typeof galleryImages[0] | null>(null)
+
+  const testimonials = [
+    {
+      id: 1,
+      name: 'Sarah Mitchell',
+      location: 'Downtown Metro',
+      rating: 5,
+      text: 'Absolutely incredible service! My car broke down at 2 AM and Greenwood\'s was there within 30 minutes. Professional, fast, and got me back on the road. Highly recommend!',
+      service: 'Emergency Roadside Repair',
+      date: '2 weeks ago'
+    },
+    {
+      id: 2,
+      name: 'Michael Chen',
+      location: 'Riverside District',
+      rating: 5,
+      text: 'I\'ve used mobile mechanics before, but Greenwood\'s is on another level. They diagnosed and fixed my transmission issue right in my driveway. Saved me a huge towing fee!',
+      service: 'Transmission Repair',
+      date: '1 month ago'
+    },
+    {
+      id: 3,
+      name: 'Jennifer Rodriguez',
+      location: 'Westside',
+      rating: 5,
+      text: 'Best mechanic experience I\'ve ever had. They came to my office, fixed my brake system during my work day, and the price was very reasonable. Will definitely use again!',
+      service: 'Brake Service',
+      date: '3 weeks ago'
+    },
+    {
+      id: 4,
+      name: 'David Thompson',
+      location: 'North Hills',
+      rating: 5,
+      text: 'Professional, courteous, and extremely knowledgeable. They explained everything clearly and fixed my electrical issues that two other shops couldn\'t figure out. Worth every penny!',
+      service: 'Electrical Diagnostics',
+      date: '1 week ago'
+    },
+    {
+      id: 5,
+      name: 'Amanda Parks',
+      location: 'Eastview',
+      rating: 5,
+      text: 'Called them for an oil change and they showed up on time, were super clean and organized, and finished quickly. The convenience of mobile service is unbeatable!',
+      service: 'Oil Change',
+      date: '4 days ago'
+    },
+    {
+      id: 6,
+      name: 'Robert Williams',
+      location: 'Southgate',
+      rating: 5,
+      text: 'Had a battery die in a parking lot. They came out, tested everything, replaced my battery, and even checked my alternator. Great service and peace of mind!',
+      service: 'Battery Replacement',
+      date: '2 months ago'
+    }
+  ]
+
+  const renderStars = (rating: number) => {
+    return Array.from({ length: 5 }).map((_, index) => (
+      <Star
+        key={index}
+        weight={index < rating ? 'fill' : 'regular'}
+        className={index < rating ? 'text-accent' : 'text-muted-foreground/30'}
+        size={18}
+      />
+    ))
+  }
 
   const handleCall = () => {
     window.location.href = 'tel:+1234567890'
@@ -359,7 +428,114 @@ function App() {
 
       <Separator />
 
-      <section id="contact" className="py-16 md:py-24 px-6 bg-muted/30">
+      <section id="testimonials" className="py-16 md:py-24 px-6 bg-muted/30">
+        <div className="max-w-7xl mx-auto">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
+            className="text-center mb-12"
+          >
+            <div className="flex items-center justify-center gap-3 mb-4">
+              <Quotes size={32} weight="duotone" className="text-accent" />
+            </div>
+            <h2 className="font-[family-name:var(--font-space)] font-bold text-3xl md:text-4xl text-foreground mb-4 tracking-tight">
+              What Our Customers Say
+            </h2>
+            <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
+              Don't just take our word for it - hear from satisfied customers who experienced our service
+            </p>
+          </motion.div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+            {testimonials.map((testimonial, index) => {
+              const initials = testimonial.name
+                .split(' ')
+                .map(n => n[0])
+                .join('')
+              
+              return (
+                <motion.div
+                  key={testimonial.id}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.5, delay: index * 0.1 }}
+                >
+                  <Card className="p-6 hover:shadow-lg transition-all duration-300 hover:-translate-y-1 border-border h-full flex flex-col">
+                    <div className="flex items-start gap-4 mb-4">
+                      <Avatar className="w-12 h-12 border-2 border-accent/20">
+                        <AvatarFallback className="bg-accent/10 text-accent font-[family-name:var(--font-space)] font-bold">
+                          {initials}
+                        </AvatarFallback>
+                      </Avatar>
+                      <div className="flex-1">
+                        <h3 className="font-[family-name:var(--font-space)] font-semibold text-base text-foreground leading-tight">
+                          {testimonial.name}
+                        </h3>
+                        <p className="text-xs text-muted-foreground flex items-center gap-1.5 mt-0.5">
+                          <MapPin size={12} weight="fill" />
+                          {testimonial.location}
+                        </p>
+                      </div>
+                    </div>
+
+                    <div className="flex items-center gap-1 mb-3">
+                      {renderStars(testimonial.rating)}
+                    </div>
+
+                    <p className="text-muted-foreground leading-relaxed mb-4 flex-1">
+                      "{testimonial.text}"
+                    </p>
+
+                    <div className="flex items-center justify-between pt-4 border-t border-border">
+                      <Badge variant="secondary" className="font-[family-name:var(--font-space)] font-medium text-xs">
+                        {testimonial.service}
+                      </Badge>
+                      <span className="text-xs text-muted-foreground">
+                        {testimonial.date}
+                      </span>
+                    </div>
+                  </Card>
+                </motion.div>
+              )
+            })}
+          </div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: 0.6 }}
+            className="mt-12 text-center"
+          >
+            <div className="inline-flex items-center gap-3 px-6 py-4 bg-card rounded-lg border border-border">
+              <div className="flex items-center gap-2">
+                <div className="flex">
+                  {renderStars(5)}
+                </div>
+                <span className="font-[family-name:var(--font-space)] font-bold text-2xl text-foreground">
+                  5.0
+                </span>
+              </div>
+              <Separator orientation="vertical" className="h-8" />
+              <div className="text-left">
+                <p className="font-[family-name:var(--font-space)] font-semibold text-foreground">
+                  150+ Happy Customers
+                </p>
+                <p className="text-sm text-muted-foreground">
+                  Average rating from verified reviews
+                </p>
+              </div>
+            </div>
+          </motion.div>
+        </div>
+      </section>
+
+      <Separator />
+
+      <section id="contact" className="py-16 md:py-24 px-6">
         <div className="max-w-4xl mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
