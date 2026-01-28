@@ -16,8 +16,29 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Build with Jekyll (Pages action)
-        uses: actions/jekyll-build-pages@v1
+      - name: Setup Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: '3.2'
+
+      - name: Install dependencies (Bundler / Gems)
+        run: |
+          if [ -f Gemfile ]; then
+            gem install bundler --no-document
+            bundle config set path 'vendor/bundle'
+            bundle install --jobs 4 --retry 3
+          else
+            gem install bundler --no-document
+            gem install github-pages --no-document
+          fi
+
+      - name: Build site with Jekyll
+        run: |
+          if [ -f Gemfile ]; then
+            bundle exec jekyll build --destination ./_site
+          else
+            jekyll build --destination ./_site
+          fi
 
       - name: Add CNAME to built site
         run: |
