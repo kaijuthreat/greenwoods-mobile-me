@@ -1,6 +1,5 @@
-import spark from "@github/spark";
-
-interface FormSubmission {
+﻿/* src/lib/email.ts - client wrapper (no @github/spark imports) */
+export type FormSubmission = {
   name: string;
   phone: string;
   email: string;
@@ -9,97 +8,25 @@ interface FormSubmission {
   model: string;
   issue: string;
   timestamp: string;
+};
+
+async function postToApi(path: string, body: unknown) {
+  const res = await fetch(path, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(body),
+  });
+  if (!res.ok) {
+    const err = await res.json().catch(() => ({ error: res.statusText }));
+    throw new Error(err?.error || `Request failed: ${res.status}`);
+  }
+  return res.json();
 }
 
-const OWNER_EMAIL = "wyattanthony.nelson05@gmail.com";
-
 export async function sendNotificationEmail(submission: FormSubmission): Promise<void> {
-  const prompt = spark.llmPrompt`You are an email composer for Greenwood's 24 Hour Mobile Mechanic Services. 
-
-Create a professional email notification for the business owner about a new service request. The email should:
-- Have a clear, professional subject line
-- Include all customer and vehicle details
-- Be formatted professionally
-
-Customer Information:
-- Name: ${submission.name}
-- Phone: ${submission.phone}
-- Email: ${submission.email}
-
-Vehicle Information:
-- Year: ${submission.year}
-- Make: ${submission.make}
-- Model: ${submission.model}
-
-Issue Description:
-${submission.issue}
-
-Submission Time: ${new Date(submission.timestamp).toLocaleString()}
-
-Return the result as a JSON object with "subject" and "body" properties. Format the body with line breaks for readability.`;
-
-  try {
-    const emailContent = await spark.llm(prompt, "gpt-4o-mini", true);
-    let parsedEmail: { subject?: string; body: string } = { body: emailContent };
-
-    try {
-      parsedEmail = JSON.parse(emailContent);
-    } catch {
-      // If the model returns plain text, fall back to using it as the body.
-      parsedEmail = { subject: "New service request", body: emailContent };
-    }
-
-    // TODO: replace console.log with real send logic (SMTP, API, etc.)
-    console.log("📧 Email Notification Sent");
-    console.log("To:", OWNER_EMAIL);
-    console.log("Subject:", parsedEmail.subject ?? "New service request");
-    console.log("---");
-    console.log(parsedEmail.body);
-    console.log("---");
-  } catch (error) {
-    console.error("Failed to send email notification:", error);
-    throw error;
-  }
+  await postToApi('/api/send-email', submission);
 }
 
 export async function sendCustomerConfirmationEmail(submission: FormSubmission): Promise<void> {
-  const prompt = spark.llmPrompt`You are an email composer for Greenwood's 24 Hour Mobile Mechanic Services.
-
-Create a friendly confirmation email to send to the customer who just submitted a service request. The email should:
-- Thank them for their request
-- Confirm we received their information
-- Let them know we'll contact them soon
-- Include their vehicle details for reference
-- Have a warm, professional tone
-
-Customer Name: ${submission.name}
-
-Vehicle: ${submission.year} ${submission.make} ${submission.model}
-
-Issue: ${submission.issue}
-
-Return the result as a JSON object with "subject" and "body" properties. Format the body with line breaks for readability.`;
-
-  try {
-    const emailContent = await spark.llm(prompt, "gpt-4o-mini", true);
-    let parsedEmail: { subject?: string; body: string } = { body: emailContent };
-
-    try {
-      parsedEmail = JSON.parse(emailContent);
-    } catch {
-      parsedEmail = { subject: "Confirmation: we received your request", body: emailContent };
-    }
-
-    // Both confirmation and notification are sent to OWNER_EMAIL per your request.
-    // If you later want to send the confirmation to the customer, change OWNER_EMAIL -> submission.email
-    console.log("📧 Customer Confirmation Sent");
-    console.log("To:", OWNER_EMAIL);
-    console.log("Subject:", parsedEmail.subject ?? "Confirmation: we received your request");
-    console.log("---");
-    console.log(parsedEmail.body);
-    console.log("---");
-  } catch (error) {
-    console.error("Failed to send customer confirmation:", error);
-    throw error;
-  }
+  await postToApi('/api/send-email', submission);
 }
