@@ -4,17 +4,13 @@ import { defineConfig, PluginOption } from "vite";
 
 import sparkPlugin from "@github/spark/spark-vite-plugin";
 import createIconImportProxy from "@github/spark/vitePhosphorIconProxyPlugin";
-import { resolve } from 'path'
+import { resolve } from "path";
 
-const projectRoot = process.env.PROJECT_ROOT || import.meta.dirname
+const projectRoot = process.env.PROJECT_ROOT || import.meta.dirname;
 
 // https://vite.dev/config/
 export default defineConfig({
-  base: '/', // custom domain / user site — serve assets from site root
-  // Set base path for GitHub Pages
-  // With custom domain (CNAME file present), use '/'
-  // Without custom domain, GitHub Pages would serve from '/repo-name/'
-  base: '/',
+  base: "/", // serve assets from site root (correct for your apex custom domain)
   plugins: [
     react(),
     tailwindcss(),
@@ -24,7 +20,11 @@ export default defineConfig({
   ],
   resolve: {
     alias: {
-      '@': resolve(projectRoot, 'src')
-    }
+      "@": resolve(projectRoot, "src"),
+    },
+  },
+  build: {
+    outDir: "docs",     // <<-- write production files directly to docs/
+    emptyOutDir: true,  // clear docs/ before build
   },
 });
