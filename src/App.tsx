@@ -11,6 +11,7 @@ import { Dialog, DialogContent, DialogTrigger } from '@/components/ui/dialog'
 import { Avatar, AvatarFallback } from '@/components/ui/avatar'
 import { toast } from 'sonner'
 import { useState } from 'react'
+import { sendNotificationEmail, sendCustomerConfirmationEmail } from '@/lib/email'
 
 function App() {
   const GOOGLE_SHEET_URL = 'YOUR_GOOGLE_APPS_SCRIPT_URL_HERE'
@@ -171,6 +172,8 @@ function App() {
     e.preventDefault()
     setIsSubmitting(true)
 
+    const timestamp = new Date().toISOString()
+
     try {
       const response = await fetch(GOOGLE_SHEET_URL, {
         method: 'POST',
@@ -179,7 +182,7 @@ function App() {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          timestamp: new Date().toISOString(),
+          timestamp,
           name: formData.name,
           phone: formData.phone,
           email: formData.email,
@@ -190,8 +193,19 @@ function App() {
         }),
       })
 
+      await Promise.all([
+        sendNotificationEmail({
+          ...formData,
+          timestamp
+        }),
+        sendCustomerConfirmationEmail({
+          ...formData,
+          timestamp
+        })
+      ])
+
       toast.success('Request received!', {
-        description: 'We\'ll contact you shortly to discuss your vehicle needs.'
+        description: 'We\'ll contact you shortly to discuss your vehicle needs. Check your email for confirmation.'
       })
 
       setFormData({

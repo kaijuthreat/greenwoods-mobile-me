@@ -34,12 +34,25 @@ This is a marketing landing page that presents business information, services, a
 - Functionality: Collects customer contact details, vehicle info, and issue description, s
 
 **Contact Form**
-- Functionality: Collects customer contact details, vehicle info, and issue description, submits to Google Sheets
-- Purpose: Enable customers to request service and provide necessary information upfront
+- Functionality: Collects customer contact details, vehicle info, and issue description, submits to Google Sheets, and sends email notifications
+- Purpose: Enable customers to request service and provide necessary information upfront, with automated notifications to business owner and customer
 - Trigger: User scrolls to contact section or clicks CTA
-- Progression: User fills form → submits → data saves to Google Sheets → receives confirmation toast
-- Success criteria: Form validates required fields, submission succeeds reliably, user receives clear feedback
+- Progression: User fills form → submits → data saves to Google Sheets → email notifications sent to business and customer → receives confirmation toast
+- Success criteria: Form validates required fields, submission succeeds reliably, emails are sent with AI-generated personalized content, user receives clear feedback
+
+**Why Choose Us Section**
+- Functionality: Displays key differentiators like 24/7 availability, mobile service, certified technicians, and fast response
 - Purpose: Build trust and differentiate from competitors
+- Trigger: User scrolls to benefits section
+- Progression: User reads service info → sees differentiators → gains confidence in choosing this service
+- Success criteria: Benefits are concise, compelling, and visually distinct
+
+**Email Notifications**
+- Functionality: Automatically generates and sends email notifications when forms are submitted using AI-powered content generation
+- Purpose: Ensure business owner is immediately notified of new service requests and customers receive confirmation
+- Trigger: Form submission success
+- Progression: Form submitted → AI generates professional notification email for business → AI generates friendly confirmation email for customer → both emails logged to console
+- Success criteria: Emails are sent successfully, contain all relevant submission details, have appropriate tone for each recipient
 **Why Choose Us Section**
 - **Quick load times**: Optimize images and assets since users may be on slow mobile con
 - Purpose: Build trust and differentiate from competitors
