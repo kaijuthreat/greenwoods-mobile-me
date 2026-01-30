@@ -34,3 +34,4 @@ pids
 .spark-workbench-id
 
 .env.local
+.vercel
