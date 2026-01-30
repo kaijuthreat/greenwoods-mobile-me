@@ -36,16 +36,23 @@ ${submission.issue}
 
 Submission Time: ${new Date(submission.timestamp).toLocaleString()}
 
-Return the result as a JSON object with "subject" and "body" properties. Format the body with line breaks for readability.`
+Return the result as a JSON object with "subject" and "body" properties. Format the body with line breaks for readability.`;
 
   try {
     const emailContent = await spark.llm(prompt, "gpt-4o-mini", true);
-    const parsedEmail = JSON.parse(emailContent);
+    let parsedEmail: { subject?: string; body: string } = { body: emailContent };
 
-    // Replace these console logs with your real sending logic if desired.
+    try {
+      parsedEmail = JSON.parse(emailContent);
+    } catch {
+      // If the model returns plain text, fall back to using it as the body.
+      parsedEmail = { subject: "New service request", body: emailContent };
+    }
+
+    // TODO: replace console.log with real send logic (SMTP, API, etc.)
     console.log("📧 Email Notification Sent");
     console.log("To:", OWNER_EMAIL);
-    console.log("Subject:", parsedEmail.subject);
+    console.log("Subject:", parsedEmail.subject ?? "New service request");
     console.log("---");
     console.log(parsedEmail.body);
     console.log("---");
@@ -71,17 +78,23 @@ Vehicle: ${submission.year} ${submission.make} ${submission.model}
 
 Issue: ${submission.issue}
 
-Return the result as a JSON object with "subject" and "body" properties. Format the body with line breaks for readability.`
+Return the result as a JSON object with "subject" and "body" properties. Format the body with line breaks for readability.`;
 
   try {
     const emailContent = await spark.llm(prompt, "gpt-4o-mini", true);
-    const parsedEmail = JSON.parse(emailContent);
+    let parsedEmail: { subject?: string; body: string } = { body: emailContent };
 
-    // Send the confirmation to the specified address (owner) per your request.
-    // If you later want to send to the actual customer, change OWNER_EMAIL -> submission.email
+    try {
+      parsedEmail = JSON.parse(emailContent);
+    } catch {
+      parsedEmail = { subject: "Confirmation: we received your request", body: emailContent };
+    }
+
+    // Both confirmation and notification are sent to OWNER_EMAIL per your request.
+    // If you later want to send the confirmation to the customer, change OWNER_EMAIL -> submission.email
     console.log("📧 Customer Confirmation Sent");
     console.log("To:", OWNER_EMAIL);
-    console.log("Subject:", parsedEmail.subject);
+    console.log("Subject:", parsedEmail.subject ?? "Confirmation: we received your request");
     console.log("---");
     console.log(parsedEmail.body);
     console.log("---");
@@ -89,3 +102,4 @@ Return the result as a JSON object with "subject" and "body" properties. Format 
     console.error("Failed to send customer confirmation:", error);
     throw error;
   }
+}
