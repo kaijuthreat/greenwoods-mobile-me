@@ -656,18 +656,31 @@ function App() {
                         className="font-[family-name:var(--font-inter)]"
                       />
                     </div>
+                  </div>
+                </div>
+
+                <div className="space-y-2">
+                  <Label htmlFor="issue" className="font-[family-name:var(--font-space)] font-semibold">
+                    Issue Description *
+                  </Label>
+                  <Textarea
+                    id="issue"
+                    required
+                    placeholder="Describe the issue you're experiencing with your vehicle..."
+                    value={formData.issue}
+                    onChange={handleInputChange}
                     className="min-h-32 font-[family-name:var(--font-inter)] resize-none"
                   />
                 </div>
 
-                  <Label htmlFor="issue" className="font-[family-name:var(--font-space)] font-semibold">
-                    Issue Description *
+                <Button 
+                  type="submit" 
                   size="lg" 
                   disabled={isSubmitting}
-                    id="issue"90 text-accent-foreground font-[family-name:var(--font-space)] font-bold text-lg tracking-wide uppercase gap-3"
+                  className="w-full bg-accent hover:bg-accent/90 text-accent-foreground font-[family-name:var(--font-space)] font-bold text-lg tracking-wide uppercase gap-3"
                 >
                   {isSubmitting ? (
-                    value={formData.issue}
+                    'Submitting...'
                   ) : (
                     <>
                       <PaperPlaneRight weight="bold" size={24} />
