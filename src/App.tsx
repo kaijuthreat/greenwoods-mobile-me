@@ -13,6 +13,8 @@ import { toast } from 'sonner'
 import { useState } from 'react'
 
 function App() {
+  const GOOGLE_SHEET_URL = 'YOUR_GOOGLE_APPS_SCRIPT_URL_HERE'
+
   const services = [
     { icon: Wrench, title: 'General Repairs', description: 'Engine diagnostics, brake service, and general maintenance' },
     { icon: BatteryCharging, title: 'Battery Service', description: 'Jump starts, testing, and battery replacement' },
@@ -169,23 +171,45 @@ function App() {
     e.preventDefault()
     setIsSubmitting(true)
 
-    await new Promise(resolve => setTimeout(resolve, 1000))
+    try {
+      const response = await fetch(GOOGLE_SHEET_URL, {
+        method: 'POST',
+        mode: 'no-cors',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          timestamp: new Date().toISOString(),
+          name: formData.name,
+          phone: formData.phone,
+          email: formData.email,
+          year: formData.year,
+          make: formData.make,
+          model: formData.model,
+          issue: formData.issue,
+        }),
+      })
 
-    toast.success('Request received!', {
-      description: 'We\'ll contact you shortly to discuss your vehicle needs.'
-    })
+      toast.success('Request received!', {
+        description: 'We\'ll contact you shortly to discuss your vehicle needs.'
+      })
 
-    setFormData({
-      name: '',
-      phone: '',
-      email: '',
-      year: '',
-      make: '',
-      model: '',
-      issue: ''
-    })
-
-    setIsSubmitting(false)
+      setFormData({
+        name: '',
+        phone: '',
+        email: '',
+        year: '',
+        make: '',
+        model: '',
+        issue: ''
+      })
+    } catch (error) {
+      toast.error('Submission failed', {
+        description: 'Please try again or call us directly at (123) 456-7890'
+      })
+    } finally {
+      setIsSubmitting(false)
+    }
   }
 
   return (

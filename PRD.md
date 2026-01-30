@@ -27,11 +27,18 @@ This is a marketing landing page that presents business information, services, a
 - Success criteria: Services are scannable, clearly labeled with relevant icons, organized logically
 
 **Work Gallery**
-- Functionality: Displays phone number, email, and service area information
+- Functionality: Visual showcase of completed repair work with images and descriptions
+- Purpose: Build credibility through visual proof of expertise
 - Trigger: User scrolls to gallery section
-- Trigger: User scrolls to bottom or clicks contact CTA
-- Progression: User needs contact info → scrolls to contact section → finds phone/email/location details
-- Success criteria: Contact information is easy to read and copy, phone number is tappable on mobile
+- Progression: User views work examples → clicks to see detail → understands quality of service
+- Success criteria: Images load quickly, descriptions are clear, modal views work smoothly
+
+**Contact Form**
+- Functionality: Collects customer contact details, vehicle info, and issue description, submits to Google Sheets
+- Purpose: Enable customers to request service and provide necessary information upfront
+- Trigger: User scrolls to contact section or clicks CTA
+- Progression: User fills form → submits → data saves to Google Sheets → receives confirmation toast
+- Success criteria: Form validates required fields, submission succeeds reliably, user receives clear feedback
 
 **Why Choose Us Section**
 - **Quick load times**: Optimize images and assets since users may be on slow mobile con
