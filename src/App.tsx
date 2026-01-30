@@ -36,8 +36,7 @@ function App() {
     year: '',
     make: '',
     model: '',
-    engine: '',
-    problem: ''
+    issue: ''
   })
 
   const [isSubmitting, setIsSubmitting] = useState(false)
@@ -183,8 +182,7 @@ function App() {
       year: '',
       make: '',
       model: '',
-      engine: '',
-      problem: ''
+      issue: ''
     })
 
     setIsSubmitting(false)
@@ -616,7 +614,7 @@ function App() {
                   <h3 className="font-[family-name:var(--font-space)] font-semibold text-lg mb-4 text-foreground">
                     Vehicle Information
                   </h3>
-                  <div className="grid md:grid-cols-2 gap-6">
+                  <div className="grid md:grid-cols-3 gap-6">
                     <div className="space-y-2">
                       <Label htmlFor="year" className="font-[family-name:var(--font-space)] font-semibold">
                         Year *
@@ -658,31 +656,18 @@ function App() {
                         className="font-[family-name:var(--font-inter)]"
                       />
                     </div>
-
-                    <div className="space-y-2">
-                      <Label htmlFor="engine" className="font-[family-name:var(--font-space)] font-semibold">
-                        Engine
-                      </Label>
-                      <Input
-                        id="engine"
-                        placeholder="2.5L 4-Cylinder"
-                        value={formData.engine}
-                        onChange={handleInputChange}
-                        className="font-[family-name:var(--font-inter)]"
-                      />
-                    </div>
                   </div>
                 </div>
 
                 <div className="space-y-2">
-                  <Label htmlFor="problem" className="font-[family-name:var(--font-space)] font-semibold">
-                    Problem Description *
+                  <Label htmlFor="issue" className="font-[family-name:var(--font-space)] font-semibold">
+                    Issue Description *
                   </Label>
                   <Textarea
-                    id="problem"
+                    id="issue"
                     required
                     placeholder="Please describe the issue you're experiencing with your vehicle..."
-                    value={formData.problem}
+                    value={formData.issue}
                     onChange={handleInputChange}
                     className="min-h-32 font-[family-name:var(--font-inter)] resize-none"
                   />
