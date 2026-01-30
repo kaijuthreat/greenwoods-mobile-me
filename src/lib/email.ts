@@ -1,4 +1,7 @@
-﻿/* src/lib/email.ts - client wrapper (no @github/spark imports) */
+// src/lib/email.ts
+// Client-side wrapper — sends the submission to the serverless API endpoint.
+// This file must NOT import '@github/spark' (server-only).
+
 export type FormSubmission = {
   name: string;
   phone: string;
@@ -23,10 +26,18 @@ async function postToApi(path: string, body: unknown) {
   return res.json();
 }
 
+/**
+ * Forward the submission to the serverless email endpoint (server handles LLM + email).
+ * Both owner notification and customer confirmation are handled server-side.
+ */
 export async function sendNotificationEmail(submission: FormSubmission): Promise<void> {
   await postToApi('/api/send-email', submission);
 }
 
+/**
+ * If you previously had a separate customer confirmation flow, call the same endpoint
+ * or create a separate server endpoint to handle different emails. For now we reuse it.
+ */
 export async function sendCustomerConfirmationEmail(submission: FormSubmission): Promise<void> {
   await postToApi('/api/send-email', submission);
 }
