@@ -1,13 +1,17 @@
+import spark from "@github/spark";
+
 interface FormSubmission {
-  name: string
-  phone: string
-  email: string
-  year: string
-  make: string
-  model: string
-  issue: string
-  timestamp: string
+  name: string;
+  phone: string;
+  email: string;
+  year: string;
+  make: string;
+  model: string;
+  issue: string;
+  timestamp: string;
 }
+
+const OWNER_EMAIL = "wyattanthony.nelson05@gmail.com";
 
 export async function sendNotificationEmail(submission: FormSubmission): Promise<void> {
   const prompt = spark.llmPrompt`You are an email composer for Greenwood's 24 Hour Mobile Mechanic Services. 
@@ -35,19 +39,19 @@ Submission Time: ${new Date(submission.timestamp).toLocaleString()}
 Return the result as a JSON object with "subject" and "body" properties. Format the body with line breaks for readability.`
 
   try {
-    const emailContent = await spark.llm(prompt, 'gpt-4o-mini', true)
-    const parsedEmail = JSON.parse(emailContent)
-    
-    console.log('📧 Email Notification Sent')
-    console.log('To: wyattanthony.nelson05@gmail.com')
-    console.log('Subject:', parsedEmail.subject)
-    console.log('---')
-    console.log(parsedEmail.body)
-    console.log('---')
-    
+    const emailContent = await spark.llm(prompt, "gpt-4o-mini", true);
+    const parsedEmail = JSON.parse(emailContent);
+
+    // Replace these console logs with your real sending logic if desired.
+    console.log("📧 Email Notification Sent");
+    console.log("To:", OWNER_EMAIL);
+    console.log("Subject:", parsedEmail.subject);
+    console.log("---");
+    console.log(parsedEmail.body);
+    console.log("---");
   } catch (error) {
-    console.error('Failed to send email notification:', error)
-    throw error
+    console.error("Failed to send email notification:", error);
+    throw error;
   }
 }
 
@@ -70,18 +74,18 @@ Issue: ${submission.issue}
 Return the result as a JSON object with "subject" and "body" properties. Format the body with line breaks for readability.`
 
   try {
-    const emailContent = await spark.llm(prompt, 'gpt-4o-mini', true)
-    const parsedEmail = JSON.parse(emailContent)
-    
-    console.log('📧 Customer Confirmation Sent')
-    console.log('To:', submission.email)
-    console.log('Subject:', parsedEmail.subject)
-    console.log('---')
-    console.log(parsedEmail.body)
-    console.log('---')
-    
+    const emailContent = await spark.llm(prompt, "gpt-4o-mini", true);
+    const parsedEmail = JSON.parse(emailContent);
+
+    // Send the confirmation to the specified address (owner) per your request.
+    // If you later want to send to the actual customer, change OWNER_EMAIL -> submission.email
+    console.log("📧 Customer Confirmation Sent");
+    console.log("To:", OWNER_EMAIL);
+    console.log("Subject:", parsedEmail.subject);
+    console.log("---");
+    console.log(parsedEmail.body);
+    console.log("---");
   } catch (error) {
-    console.error('Failed to send customer confirmation:', error)
-    throw error
+    console.error("Failed to send customer confirmation:", error);
+    throw error;
   }
-}
