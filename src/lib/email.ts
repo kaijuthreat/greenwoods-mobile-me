@@ -39,7 +39,7 @@ Return the result as a JSON object with "subject" and "body" properties. Format 
     const parsedEmail = JSON.parse(emailContent)
     
     console.log('📧 Email Notification Sent')
-    console.log('To: service@greenwoodmobilemechanic.com')
+    console.log('To: wyattanthony.nelson05@gmail.com')
     console.log('Subject:', parsedEmail.subject)
     console.log('---')
     console.log(parsedEmail.body)
