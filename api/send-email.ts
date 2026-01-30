@@ -1,6 +1,5 @@
 ﻿/* api/send-email.ts */
 import { VercelRequest, VercelResponse } from '@vercel/node';
-import spark from '@github/spark';
 import nodemailer from 'nodemailer';
 
 type FormSubmission = {
@@ -32,6 +31,12 @@ function createTransporter() {
   });
 }
 
+async function loadSpark() {
+  const moduleName = '@' + 'github/spark';
+  const mod = await import(moduleName);
+  return (mod && (mod as any).default) ? (mod as any).default : mod;
+}
+
 export default async function handler(req: VercelRequest, res: VercelResponse) {
   if (req.method !== 'POST') return res.status(405).json({ error: 'Method not allowed' });
 
@@ -39,6 +44,8 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
   if (!submission) return res.status(400).json({ error: 'Invalid body' });
 
   try {
+    const spark = await loadSpark();
+
     const prompt = spark.llmPrompt`You are an email composer for Greenwood's 24 Hour Mobile Mechanic Services. 
 
 Create a professional email notification for the business owner about a new service request. The email should:
