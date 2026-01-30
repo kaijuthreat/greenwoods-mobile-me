@@ -713,10 +713,10 @@ function App() {
                     Email
                   </h4>
                   <a 
-                    href="mailto:service@greenwoods.com" 
+                    href="mailto:service@greenwoodmobilemechanic.com" 
                     className="text-muted-foreground hover:text-accent transition-colors"
                   >
-                    service@greenwoods.com
+                    service@greenwoodmobilemechanic.com
                   </a>
                 </div>
                 <div>
