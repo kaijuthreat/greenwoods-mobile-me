@@ -15,6 +15,19 @@ import { sendNotificationEmail, sendCustomerConfirmationEmail } from '@/lib/emai
 
 function App() {
   const GOOGLE_SHEET_URL = 'YOUR_GOOGLE_APPS_SCRIPT_URL_HERE'
+  
+  const GOOGLE_FORM_ACTION = 'https://docs.google.com/forms/d/e/1FAIpQLSfbz658-jNCCwfeg-Cx53tmGQZa4NgeRNkJ7K2Dg4sRta8XGA/formResponse';
+
+  const ENTRY_IDS = {
+    name:  'entry.706110907',
+    phone: 'entry.1591949114',
+    year:  'entry.168801310',
+    make:  'entry.2049512608',
+    model: 'entry.1791438602',
+    issue: 'entry.405508598',
+    email: '',
+    timestamp: ''
+  };
 
   const services = [
     { icon: Wrench, title: 'General Repairs', description: 'Engine diagnostics, brake service, and general maintenance' },
@@ -175,23 +188,38 @@ function App() {
     const timestamp = new Date().toISOString()
 
     try {
-      const response = await fetch(GOOGLE_SHEET_URL, {
-        method: 'POST',
-        mode: 'no-cors',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          timestamp,
-          name: formData.name,
-          phone: formData.phone,
-          email: formData.email,
-          year: formData.year,
-          make: formData.make,
-          model: formData.model,
-          issue: formData.issue,
-        }),
+      // Create hidden form to submit to Google Form
+      const form = document.createElement('form')
+      form.method = 'POST'
+      form.action = GOOGLE_FORM_ACTION
+      form.target = '_blank'
+      form.style.display = 'none'
+
+      // Add form fields only when ENTRY_IDS is non-empty
+      const fieldMapping: { [key: string]: string } = {
+        name: formData.name,
+        phone: formData.phone,
+        year: formData.year,
+        make: formData.make,
+        model: formData.model,
+        issue: formData.issue,
+        email: formData.email,
+        timestamp: timestamp
+      }
+
+      Object.entries(ENTRY_IDS).forEach(([field, entryId]) => {
+        if (entryId && fieldMapping[field]) {
+          const input = document.createElement('input')
+          input.type = 'hidden'
+          input.name = entryId
+          input.value = fieldMapping[field]
+          form.appendChild(input)
+        }
       })
+
+      document.body.appendChild(form)
+      form.submit()
+      document.body.removeChild(form)
 
       await Promise.all([
         sendNotificationEmail({
