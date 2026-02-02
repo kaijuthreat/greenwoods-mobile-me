@@ -25,6 +25,7 @@ function App() {
     make:  'entry.2049512608',
     model: 'entry.1791438602',
     issue: 'entry.405508598',
+    // TODO: Add entry IDs for email and timestamp if/when available from Google Form
     email: '',
     timestamp: ''
   };
@@ -219,7 +220,11 @@ function App() {
 
       document.body.appendChild(form)
       form.submit()
-      document.body.removeChild(form)
+      
+      // Remove form after a brief delay to ensure submission completes
+      setTimeout(() => {
+        document.body.removeChild(form)
+      }, 100)
 
       await Promise.all([
         sendNotificationEmail({
