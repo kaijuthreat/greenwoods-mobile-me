@@ -190,23 +190,42 @@ const ENTRY_IDS = {
     const timestamp = new Date().toISOString()
 
     try {
-      const response = await fetch(GOOGLE_SHEET_URL, {
-        method: 'POST',
-        mode: 'no-cors',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          timestamp,
-          name: formData.name,
-          phone: formData.phone,
-          email: formData.email,
-          year: formData.year,
-          make: formData.make,
-          model: formData.model,
-          issue: formData.issue,
-        }),
+      // Create hidden form to submit to Google Form
+      const form = document.createElement('form')
+      form.method = 'POST'
+      form.action = GOOGLE_FORM_ACTION
+      form.target = '_blank'
+      form.style.display = 'none'
+
+      // Add form fields only when ENTRY_IDS is non-empty
+      const fieldMapping: { [key: string]: string } = {
+        name: formData.name,
+        phone: formData.phone,
+        year: formData.year,
+        make: formData.make,
+        model: formData.model,
+        issue: formData.issue,
+        email: formData.email,
+        timestamp: timestamp
+      }
+
+      Object.entries(ENTRY_IDS).forEach(([field, entryId]) => {
+        if (entryId && fieldMapping[field]) {
+          const input = document.createElement('input')
+          input.type = 'hidden'
+          input.name = entryId
+          input.value = fieldMapping[field]
+          form.appendChild(input)
+        }
       })
+
+      document.body.appendChild(form)
+      form.submit()
+      
+      // Remove form after a brief delay to ensure submission completes
+      setTimeout(() => {
+        document.body.removeChild(form)
+      }, 100)
 
       await Promise.all([
         sendNotificationEmail({
