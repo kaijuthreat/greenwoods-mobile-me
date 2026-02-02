@@ -15,7 +15,22 @@ import { sendNotificationEmail, sendCustomerConfirmationEmail } from '@/lib/emai
 
 function App() {
   const GOOGLE_SHEET_URL = 'YOUR_GOOGLE_APPS_SCRIPT_URL_HERE'
+// Google Form endpoint (derived from your iframe/form)
+const GOOGLE_FORM_ACTION = 'https://docs.google.com/forms/d/e/1FAIpQLSfbz658-jNCCwfeg-Cx53tmGQZa4NgeRNkJ7K2Dg4sRta8XGA/formResponse';
 
+// Entry IDs from the prefill URL you provided
+const ENTRY_IDS = {
+  name:  'entry.706110907',
+  phone: 'entry.1591949114',
+  // address exists in the form but your app doesn't currently have an address input
+  year:  'entry.168801310',
+  make:  'entry.2049512608',
+  model: 'entry.1791438602',
+  issue: 'entry.405508598',
+  // email/timestamp entry IDs were not present in the prefill; add if/when available
+  email: '',
+  timestamp: ''
+};
   const services = [
     { icon: Wrench, title: 'General Repairs', description: 'Engine diagnostics, brake service, and general maintenance' },
     { icon: BatteryCharging, title: 'Battery Service', description: 'Jump starts, testing, and battery replacement' },
