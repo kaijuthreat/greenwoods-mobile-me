@@ -4,17 +4,12 @@ import { Button } from '@/components/ui/button'
 import { Card } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
 import { Separator } from '@/components/ui/separator'
-import { Input } from '@/components/ui/input'
-import { Textarea } from '@/components/ui/textarea'
-import { Label } from '@/components/ui/label'
 import { Dialog, DialogContent, DialogTrigger } from '@/components/ui/dialog'
 import { Avatar, AvatarFallback } from '@/components/ui/avatar'
-import { toast } from 'sonner'
 import { useState } from 'react'
-import { sendNotificationEmail, sendCustomerConfirmationEmail } from '@/lib/email'
 
 function App() {
-  const GOOGLE_SHEET_URL = 'YOUR_GOOGLE_APPS_SCRIPT_URL_HERE'
+  const GOOGLE_FORM_ACTION = 'https://docs.google.com/forms/d/e/1FAIpQLSfbz658-jNCCwfeg-Cx53tmGQZa4NgeRNkJ7K2Dg4sRta8XGA/formResponse';
 
   const services = [
     { icon: Wrench, title: 'General Repairs', description: 'Engine diagnostics, brake service, and general maintenance' },
@@ -31,18 +26,6 @@ function App() {
     { icon: CheckCircle, title: 'Certified Technicians', description: 'Experienced and fully licensed mechanics' },
     { icon: Lightning, title: 'Fast Response', description: 'Quick arrival times when you need help most' },
   ]
-
-  const [formData, setFormData] = useState({
-    name: '',
-    phone: '',
-    email: '',
-    year: '',
-    make: '',
-    model: '',
-    issue: ''
-  })
-
-  const [isSubmitting, setIsSubmitting] = useState(false)
 
   const galleryImages = [
     {
@@ -161,69 +144,6 @@ function App() {
 
   const handleCall = () => {
     window.location.href = 'tel:+1234567890'
-  }
-
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    const { id, value } = e.target
-    setFormData(prev => ({ ...prev, [id]: value }))
-  }
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault()
-    setIsSubmitting(true)
-
-    const timestamp = new Date().toISOString()
-
-    try {
-      const response = await fetch(GOOGLE_SHEET_URL, {
-        method: 'POST',
-        mode: 'no-cors',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          timestamp,
-          name: formData.name,
-          phone: formData.phone,
-          email: formData.email,
-          year: formData.year,
-          make: formData.make,
-          model: formData.model,
-          issue: formData.issue,
-        }),
-      })
-
-      await Promise.all([
-        sendNotificationEmail({
-          ...formData,
-          timestamp
-        }),
-        sendCustomerConfirmationEmail({
-          ...formData,
-          timestamp
-        })
-      ])
-
-      toast.success('Request received!', {
-        description: 'We\'ll contact you shortly to discuss your vehicle needs. Check your email for confirmation.'
-      })
-
-      setFormData({
-        name: '',
-        phone: '',
-        email: '',
-        year: '',
-        make: '',
-        model: '',
-        issue: ''
-      })
-    } catch (error) {
-      toast.error('Submission failed', {
-        description: 'Please try again or call us directly at (123) 456-7890'
-      })
-    } finally {
-      setIsSubmitting(false)
-    }
   }
 
   return (
@@ -578,159 +498,40 @@ function App() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5 }}
+            className="text-center"
           >
-            <div className="text-center mb-12">
-              <h2 className="font-[family-name:var(--font-space)] font-bold text-3xl md:text-4xl text-foreground mb-4 tracking-tight">
-                Contact Us
-              </h2>
-              <p className="text-muted-foreground text-lg mb-6">
-                Fill out the form below and we'll get back to you as soon as possible
-              </p>
-              <div className="flex items-center justify-center gap-3 mb-2">
-                <Phone weight="duotone" size={28} className="text-accent" />
-                <span className="text-sm text-muted-foreground">Or call us directly at</span>
-              </div>
-              <a 
-                href="tel:+1234567890" 
-                className="text-2xl font-[family-name:var(--font-space)] font-bold text-accent hover:text-accent/80 transition-colors"
+            <h2 className="font-[family-name:var(--font-space)] font-bold text-3xl md:text-4xl text-foreground mb-4 tracking-tight">
+              Contact Us
+            </h2>
+            <p className="text-muted-foreground text-lg mb-8">
+              Let us know about your car's problem and we'll get back to you as soon as possible
+            </p>
+
+            <div className="flex flex-col items-center gap-8 mb-12">
+              <Button 
+                onClick={() => window.open(GOOGLE_FORM_ACTION.replace('/formResponse', '/viewform'), '_blank')}
+                size="lg" 
+                className="bg-accent hover:bg-accent/90 text-accent-foreground font-[family-name:var(--font-space)] font-bold text-lg tracking-wide uppercase gap-3 hover:scale-105 transition-transform px-8 py-6"
               >
-                (123) 456-7890
-              </a>
+                <PaperPlaneRight weight="bold" size={24} />
+                Let Us Know Your Car's Problem
+              </Button>
+              <div className="flex flex-col items-center gap-3">
+                <div className="flex items-center gap-3">
+                  <Phone weight="duotone" size={28} className="text-accent" />
+                  <span className="text-sm text-muted-foreground">Or call us directly at</span>
+                </div>
+                <a 
+                  href="tel:+1234567890" 
+                  className="text-2xl font-[family-name:var(--font-space)] font-bold text-accent hover:text-accent/80 transition-colors"
+                >
+                  (123) 456-7890
+                </a>
+              </div>
             </div>
 
             <Card className="p-8 md:p-12 border-border">
-              <form onSubmit={handleSubmit} className="space-y-6">
-                <div className="grid md:grid-cols-2 gap-6">
-                  <div className="space-y-2">
-                    <Label htmlFor="name" className="font-[family-name:var(--font-space)] font-semibold">
-                      Full Name *
-                    </Label>
-                    <Input
-                      id="name"
-                      required
-                      placeholder="John Doe"
-                      value={formData.name}
-                      onChange={handleInputChange}
-                      className="font-[family-name:var(--font-inter)]"
-                    />
-                  </div>
-
-                  <div className="space-y-2">
-                    <Label htmlFor="phone" className="font-[family-name:var(--font-space)] font-semibold">
-                      Phone Number *
-                    </Label>
-                    <Input
-                      id="phone"
-                      type="tel"
-                      required
-                      placeholder="(123) 456-7890"
-                      value={formData.phone}
-                      onChange={handleInputChange}
-                      className="font-[family-name:var(--font-inter)]"
-                    />
-                  </div>
-                </div>
-
-                <div className="space-y-2">
-                  <Label htmlFor="email" className="font-[family-name:var(--font-space)] font-semibold">
-                    Email Address *
-                  </Label>
-                  <Input
-                    id="email"
-                    type="email"
-                    required
-                    placeholder="john@example.com"
-                    value={formData.email}
-                    onChange={handleInputChange}
-                    className="font-[family-name:var(--font-inter)]"
-                  />
-                </div>
-
-                <Separator />
-
-                <div>
-                  <h3 className="font-[family-name:var(--font-space)] font-semibold text-lg mb-4 text-foreground">
-                    Vehicle Information
-                  </h3>
-                  <div className="grid md:grid-cols-3 gap-6">
-                    <div className="space-y-2">
-                      <Label htmlFor="year" className="font-[family-name:var(--font-space)] font-semibold">
-                        Year *
-                      </Label>
-                      <Input
-                        id="year"
-                        required
-                        placeholder="2020"
-                        value={formData.year}
-                        onChange={handleInputChange}
-                        className="font-[family-name:var(--font-inter)]"
-                      />
-                    </div>
-
-                    <div className="space-y-2">
-                      <Label htmlFor="make" className="font-[family-name:var(--font-space)] font-semibold">
-                        Make *
-                      </Label>
-                      <Input
-                        id="make"
-                        required
-                        placeholder="Toyota"
-                        value={formData.make}
-                        onChange={handleInputChange}
-                        className="font-[family-name:var(--font-inter)]"
-                      />
-                    </div>
-
-                    <div className="space-y-2">
-                      <Label htmlFor="model" className="font-[family-name:var(--font-space)] font-semibold">
-                        Model *
-                      </Label>
-                      <Input
-                        id="model"
-                        required
-                        placeholder="Camry"
-                        value={formData.model}
-                        onChange={handleInputChange}
-                        className="font-[family-name:var(--font-inter)]"
-                      />
-                    </div>
-                  </div>
-                </div>
-
-                <div className="space-y-2">
-                  <Label htmlFor="issue" className="font-[family-name:var(--font-space)] font-semibold">
-                    Issue Description *
-                  </Label>
-                  <Textarea
-                    id="issue"
-                    required
-                    placeholder="Describe the issue you're experiencing with your vehicle..."
-                    value={formData.issue}
-                    onChange={handleInputChange}
-                    className="min-h-32 font-[family-name:var(--font-inter)] resize-none"
-                  />
-                </div>
-
-                <Button 
-                  type="submit" 
-                  size="lg" 
-                  disabled={isSubmitting}
-                  className="w-full bg-accent hover:bg-accent/90 text-accent-foreground font-[family-name:var(--font-space)] font-bold text-lg tracking-wide uppercase gap-3"
-                >
-                  {isSubmitting ? (
-                    'Submitting...'
-                  ) : (
-                    <>
-                      <PaperPlaneRight weight="bold" size={24} />
-                      Submit Request
-                    </>
-                  )}
-                </Button>
-              </form>
-
-              <Separator className="my-8" />
-
-              <div className="grid md:grid-cols-2 gap-6 text-center md:text-left">
+              <div className="grid md:grid-cols-2 gap-8 text-center md:text-left">
                 <div>
                   <h4 className="font-[family-name:var(--font-space)] font-semibold text-lg mb-2 text-foreground">
                     Email
