@@ -516,15 +516,15 @@ function App() {
                 <PaperPlaneRight weight="bold" size={24} />
                 Let Us Know Your Car's Problem
               </Button>
-              <a
-                href="https://docs.google.com/forms/d/e/1FAIpQLSfbz658-jNCCwfeg-Cx53tmGQZa4NgeRNkJ7K2Dg4sRta8XGA/viewform"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="mt-2 text-sm text-blue-600 underline block"
+              <Button
+                size="sm"
+                variant="outline"
+                onClick={() => window.open(GOOGLE_FORM_ACTION.replace('/formResponse', '/viewform'), '_blank')}
+                className="mt-2 px-6 py-3 text-sm border-accent text-accent font-semibold rounded-md hover:bg-accent/10 transition-colors"
                 aria-label="Open Google Form to report your car's problem (opens in new tab)"
               >
                 Report your car's problem (Google Form)
-              </a>
+              </Button>
               <div className="flex flex-col items-center gap-3">
                 <div className="flex items-center gap-3">
                   <Phone weight="duotone" size={28} className="text-accent" />
