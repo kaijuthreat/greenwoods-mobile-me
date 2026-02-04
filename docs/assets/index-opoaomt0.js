@@ -1,14 +1,14 @@
 /* ---- Temporary: block _spark network calls on static GitHub Pages ----
    Injected quick-fix: intercept fetch, XHR and sendBeacon targeting "_spark"
    This prevents client-side 405s from a static host and avoids breaking other JS.
-   NOTE: This is a generated bundle edit — implement a source-level fix later.
+   NOTE: This is a generated bundle edit ï¿½ implement a source-level fix later.
 */
 (function(){
   function isSparkURL(u){
     try{
       if(!u) return false;
-      if(typeof u === "string") return u.indexOf("_spark") -ne -1;
-      if(u -and typeof u.url -eq "string") return u.url.indexOf("_spark") -ne -1;
+      if(typeof u === "string") return u.indexOf("_spark") !== -1;
+      if(u && typeof u.url === "string") return u.url.indexOf("_spark") !== -1;
       return false;
     }catch(e){ return false; }
   }
@@ -25,7 +25,7 @@
             headers: { "Content-Type": "application/json" }
           }));
         } catch(e) {
-          return Promise.resolve({ ok: $true, status: 200, json: async { return {}; } });
+          return Promise.resolve({ ok: true, status: 200, json: async () => { return {}; } });
         }
       }
       return _origFetch.apply(this, arguments);
@@ -58,12 +58,12 @@
   } catch(e) {}
 
   try {
-    if(navigator -and navigator.sendBeacon){
+    if(navigator && navigator.sendBeacon){
       const _origBeacon = navigator.sendBeacon;
       navigator.sendBeacon = function(url, data){
         if(isSparkURL(url)){
           console.info("Blocked sendBeacon to", url);
-          return $true;
+          return true;
         }
         return _origBeacon.apply(this, arguments);
       };
