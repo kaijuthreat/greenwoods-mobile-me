@@ -516,14 +516,15 @@ function App() {
                 <PaperPlaneRight weight="bold" size={24} />
                 Let Us Know Your Car's Problem
               </Button>
-<a
-  href="https://docs.google.com/forms/d/e/1FAIpQLSfbz658-jNCCwfeg-Cx53tmGQZa4NgeRNkJ7K2Dg4sRta8XGA/viewform"
-  target="_blank"
-  rel="noopener noreferrer"
-  className="mt-2 text-sm text-blue-600 underline block"
->
-  Report your car's problem (Google Form)
-</a>
+              <a
+                href="https://docs.google.com/forms/d/e/1FAIpQLSfbz658-jNCCwfeg-Cx53tmGQZa4NgeRNkJ7K2Dg4sRta8XGA/viewform"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="mt-2 text-sm text-blue-600 underline block"
+                aria-label="Open Google Form to report your car's problem (opens in new tab)"
+              >
+                Report your car's problem (Google Form)
+              </a>
               <div className="flex flex-col items-center gap-3">
                 <div className="flex items-center gap-3">
                   <Phone weight="duotone" size={28} className="text-accent" />
