@@ -525,7 +525,7 @@ function App() {
                   href="tel:+1234567890" 
                   className="text-2xl font-[family-name:var(--font-space)] font-bold text-accent hover:text-accent/80 transition-colors"
                 >
-                  (123) 456-7890
+                  (706) 302-0163
                 </a>
               </div>
             </div>
@@ -540,7 +540,7 @@ function App() {
                     href="mailto:service@greenwoodmobilemechanic.com" 
                     className="text-muted-foreground hover:text-accent transition-colors"
                   >
-                    service@greenwoodmobilemechanic.com
+                    greenwoodc233@gmail.com
                   </a>
                 </div>
                 <div>
