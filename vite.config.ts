@@ -12,7 +12,7 @@ const projectRoot = process.env.PROJECT_ROOT || import.meta.dirname;
 export default defineConfig({
   // For GitHub Pages repo site use: base: '/greenwoods-mobile-me/'
   // If you're using a custom apex domain (greenwoodmobilemechanic.com) keep base: '/' or use base: './' for relative assets.
-  base: "/greenwoods-mobile-me/",
+  base: "/",
   plugins: [
     react(),
     tailwindcss(),
