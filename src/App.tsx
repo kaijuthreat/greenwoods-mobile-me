@@ -143,7 +143,7 @@ function App() {
   }
 
   const handleCall = () => {
-    window.location.href = 'tel:+1234567890'
+    window.location.href = 'tel:+17063020163'
   }
 
   return (
@@ -522,7 +522,7 @@ function App() {
                   <span className="text-sm text-muted-foreground">Or call us directly at</span>
                 </div>
                 <a 
-                  href="tel:+1234567890" 
+                  href="tel:+17063020163" 
                   className="text-2xl font-[family-name:var(--font-space)] font-bold text-accent hover:text-accent/80 transition-colors"
                 >
                   (706) 302-0163
