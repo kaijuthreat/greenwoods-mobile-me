@@ -27,52 +27,52 @@ function App() {
     { icon: Lightning, title: 'Fast Response', description: 'Quick arrival times when you need help most' },
   ]
 
-  const galleryImages = [
-    {
-      id: 1,
-      title: 'Engine Overhaul',
-      description: 'Complete engine rebuild on 2018 Ford F-150',
-      category: 'Engine Work',
-      image: 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="800" height="600"%3E%3Crect fill="%23f3f4f6" width="800" height="600"/%3E%3Cpath fill="%234b5563" d="M300 200h200v200h-200z"/%3E%3Ccircle fill="%236b7280" cx="400" cy="300" r="60"/%3E%3Crect fill="%239ca3af" x="350" y="240" width="100" height="40"/%3E%3Ctext x="400" y="450" font-family="Arial" font-size="24" fill="%234b5563" text-anchor="middle"%3EEngine Overhaul%3C/text%3E%3C/svg%3E'
-    },
-    {
-      id: 2,
-      title: 'Brake System Replacement',
-      description: 'Full brake pad and rotor replacement on Honda Civic',
-      category: 'Brake Service',
-      image: 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="800" height="600"%3E%3Crect fill="%23e0e7ff" width="800" height="600"/%3E%3Ccircle fill="%234f46e5" cx="400" cy="300" r="100"/%3E%3Ccircle fill="%23312e81" cx="400" cy="300" r="60"/%3E%3Cpath fill="%236366f1" d="M340 300h120M400 240v120"/%3E%3Ctext x="400" y="450" font-family="Arial" font-size="24" fill="%234f46e5" text-anchor="middle"%3EBrake System%3C/text%3E%3C/svg%3E'
-    },
-    {
-      id: 3,
-      title: 'Transmission Service',
-      description: 'Transmission fluid change and diagnostics on Toyota Camry',
-      category: 'Transmission',
-      image: 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="800" height="600"%3E%3Crect fill="%23fef3c7" width="800" height="600"/%3E%3Crect fill="%23d97706" x="300" y="250" width="80" height="100" rx="10"/%3E%3Crect fill="%23f59e0b" x="420" y="250" width="80" height="100" rx="10"/%3E%3Crect fill="%23fbbf24" x="360" y="200" width="80" height="80" rx="10"/%3E%3Ctext x="400" y="450" font-family="Arial" font-size="24" fill="%23d97706" text-anchor="middle"%3ETransmission%3C/text%3E%3C/svg%3E'
-    },
-    {
-      id: 4,
-      title: 'Electrical Diagnostics',
-      description: 'Complete electrical system diagnostic and repair',
-      category: 'Electrical',
-      image: 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="800" height="600"%3E%3Crect fill="%23dbeafe" width="800" height="600"/%3E%3Cpath fill="%232563eb" d="M400 150l-60 150h50l-40 150 110-180h-60z"/%3E%3Ccircle fill="none" stroke="%233b82f6" stroke-width="4" cx="400" cy="300" r="120"/%3E%3Ctext x="400" y="520" font-family="Arial" font-size="24" fill="%232563eb" text-anchor="middle"%3EElectrical Systems%3C/text%3E%3C/svg%3E'
-    },
-    {
-      id: 5,
-      title: 'Oil Change & Filter',
-      description: 'Synthetic oil change with premium filter on BMW 3 Series',
-      category: 'Maintenance',
-      image: 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="800" height="600"%3E%3Crect fill="%23f0fdf4" width="800" height="600"/%3E%3Cellipse fill="%2316a34a" cx="400" cy="280" rx="80" ry="40"/%3E%3Crect fill="%2322c55e" x="360" y="280" width="80" height="120"/%3E%3Cellipse fill="%2316a34a" cx="400" cy="400" rx="80" ry="40"/%3E%3Ctext x="400" y="480" font-family="Arial" font-size="24" fill="%2316a34a" text-anchor="middle"%3EOil Change%3C/text%3E%3C/svg%3E'
-    },
-    {
-      id: 6,
-      title: 'Suspension Repair',
-      description: 'Front suspension struts and alignment on Jeep Cherokee',
-      category: 'Suspension',
-      image: 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="800" height="600"%3E%3Crect fill="%23fce7f3" width="800" height="600"/%3E%3Crect fill="%23db2777" x="280" y="200" width="40" height="200" rx="20"/%3E%3Crect fill="%23db2777" x="480" y="200" width="40" height="200" rx="20"/%3E%3Ccircle fill="%23ec4899" cx="300" cy="420" r="40"/%3E%3Ccircle fill="%23ec4899" cx="500" cy="420" r="40"/%3E%3Ctext x="400" y="520" font-family="Arial" font-size="24" fill="%23db2777" text-anchor="middle"%3ESuspension Repair%3C/text%3E%3C/svg%3E'
-    }
-  ]
+  // const galleryImages = [
+  //   {
+  //     id: 1,
+  //     title: 'Engine Overhaul',
+  //     description: 'Complete engine rebuild on 2018 Ford F-150',
+  //     category: 'Engine Work',
+  //     image: 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="800" height="600"%3E%3Crect fill="%23f3f4f6" width="800" height="600"/%3E%3Cpath fill="%234b5563" d="M300 200h200v200h-200z"/%3E%3Ccircle fill="%236b7280" cx="400" cy="300" r="60"/%3E%3Crect fill="%239ca3af" x="350" y="240" width="100" height="40"/%3E%3Ctext x="400" y="450" font-family="Arial" font-size="24" fill="%234b5563" text-anchor="middle"%3EEngine Overhaul%3C/text%3E%3C/svg%3E'
+  //   },
+  //   {
+  //     id: 2,
+  //     title: 'Brake System Replacement',
+  //     description: 'Full brake pad and rotor replacement on Honda Civic',
+  //     category: 'Brake Service',
+  //     image: 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="800" height="600"%3E%3Crect fill="%23e0e7ff" width="800" height="600"/%3E%3Ccircle fill="%234f46e5" cx="400" cy="300" r="100"/%3E%3Ccircle fill="%23312e81" cx="400" cy="300" r="60"/%3E%3Cpath fill="%236366f1" d="M340 300h120M400 240v120"/%3E%3Ctext x="400" y="450" font-family="Arial" font-size="24" fill="%234f46e5" text-anchor="middle"%3EBrake System%3C/text%3E%3C/svg%3E'
+  //   },
+  //   {
+  //     id: 3,
+  //     title: 'Transmission Service',
+  //     description: 'Transmission fluid change and diagnostics on Toyota Camry',
+  //     category: 'Transmission',
+  //     image: 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="800" height="600"%3E%3Crect fill="%23fef3c7" width="800" height="600"/%3E%3Crect fill="%23d97706" x="300" y="250" width="80" height="100" rx="10"/%3E%3Crect fill="%23f59e0b" x="420" y="250" width="80" height="100" rx="10"/%3E%3Crect fill="%23fbbf24" x="360" y="200" width="80" height="80" rx="10"/%3E%3Ctext x="400" y="450" font-family="Arial" font-size="24" fill="%23d97706" text-anchor="middle"%3ETransmission%3C/text%3E%3C/svg%3E'
+  //   },
+  //   {
+  //     id: 4,
+  //     title: 'Electrical Diagnostics',
+  //     description: 'Complete electrical system diagnostic and repair',
+  //     category: 'Electrical',
+  //     image: 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="800" height="600"%3E%3Crect fill="%23dbeafe" width="800" height="600"/%3E%3Cpath fill="%232563eb" d="M400 150l-60 150h50l-40 150 110-180h-60z"/%3E%3Ccircle fill="none" stroke="%233b82f6" stroke-width="4" cx="400" cy="300" r="120"/%3E%3Ctext x="400" y="520" font-family="Arial" font-size="24" fill="%232563eb" text-anchor="middle"%3EElectrical Systems%3C/text%3E%3C/svg%3E'
+  //   },
+  //   {
+  //     id: 5,
+  //     title: 'Oil Change & Filter',
+  //     description: 'Synthetic oil change with premium filter on BMW 3 Series',
+  //     category: 'Maintenance',
+  //     image: 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="800" height="600"%3E%3Crect fill="%23f0fdf4" width="800" height="600"/%3E%3Cellipse fill="%2316a34a" cx="400" cy="280" rx="80" ry="40"/%3E%3Crect fill="%2322c55e" x="360" y="280" width="80" height="120"/%3E%3Cellipse fill="%2316a34a" cx="400" cy="400" rx="80" ry="40"/%3E%3Ctext x="400" y="480" font-family="Arial" font-size="24" fill="%2316a34a" text-anchor="middle"%3EOil Change%3C/text%3E%3C/svg%3E'
+  //   },
+  //   {
+  //     id: 6,
+  //     title: 'Suspension Repair',
+  //     description: 'Front suspension struts and alignment on Jeep Cherokee',
+  //     category: 'Suspension',
+  //     image: 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="800" height="600"%3E%3Crect fill="%23fce7f3" width="800" height="600"/%3E%3Crect fill="%23db2777" x="280" y="200" width="40" height="200" rx="20"/%3E%3Crect fill="%23db2777" x="480" y="200" width="40" height="200" rx="20"/%3E%3Ccircle fill="%23ec4899" cx="300" cy="420" r="40"/%3E%3Ccircle fill="%23ec4899" cx="500" cy="420" r="40"/%3E%3Ctext x="400" y="520" font-family="Arial" font-size="24" fill="%23db2777" text-anchor="middle"%3ESuspension Repair%3C/text%3E%3C/svg%3E'
+  //   }
+  // ]
 
-  const [selectedImage, setSelectedImage] = useState<typeof galleryImages[0] | null>(null)
+  // const [selectedImage, setSelectedImage] = useState<typeof galleryImages[0] | null>(null)
 
   const testimonials = [
     {
@@ -293,7 +293,7 @@ function App() {
         </div>
       </section>
 
-      <Separator />
+      {/* <Separator />
 
       <section id="gallery" className="py-16 md:py-24 px-6">
         <div className="max-w-7xl mx-auto">
@@ -382,7 +382,7 @@ function App() {
         </div>
       </section>
 
-      <Separator />
+      <Separator /> */}
 
       <section id="testimonials" className="py-16 md:py-24 px-6 bg-muted/30">
         <div className="max-w-7xl mx-auto">
