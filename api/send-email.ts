@@ -13,7 +13,7 @@ type FormSubmission = {
   timestamp: string;
 };
 
-const OWNER_EMAIL = process.env.OWNER_EMAIL || 'wyattanthony.nelson05@gmail.com';
+const OWNER_EMAIL = process.env.OWNER_EMAIL || 'greenwoodc233@gmail.com';
 
 function createTransporter() {
   const host = process.env.SMTP_HOST;
@@ -31,15 +31,6 @@ function createTransporter() {
   });
 }
 
-async function loadSpark() {
-  // Build the module name at runtime so bundlers/static analyzers won't resolve it
-  // during pre-bundling. This keeps '@github/spark' server-only.
-  const moduleName = '@' + 'github/spark';
-  const mod = await import(moduleName);
-  // module may export default or named API
-  return (mod && (mod as any).default) ? (mod as any).default : mod;
-}
-
 export default async function handler(req: VercelRequest, res: VercelResponse) {
   if (req.method !== 'POST') return res.status(405).json({ error: 'Method not allowed' });
 
@@ -47,15 +38,9 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
   if (!submission) return res.status(400).json({ error: 'Invalid body' });
 
   try {
-    // Load spark at runtime (server-side only)
-    const spark = await loadSpark();
+    const transporter = createTransporter();
 
-    const prompt = spark.llmPrompt`You are an email composer for Greenwood's 24 Hour Mobile Mechanic Services. 
-
-Create a professional email notification for the business owner about a new service request. The email should:
-- Have a clear, professional subject line
-- Include all customer and vehicle details
-- Be formatted professionally
+    const emailBody = `New Service Request from Greenwood's Website
 
 Customer Information:
 - Name: ${submission.name}
@@ -70,24 +55,14 @@ Vehicle Information:
 Issue Description:
 ${submission.issue}
 
-Submission Time: ${new Date(submission.timestamp).toLocaleString()}
+Submitted: ${new Date(submission.timestamp).toLocaleString()}
+`;
 
-Return the result as a JSON object with "subject" and "body" properties. Format the body with line breaks for readability.`;
-
-    const emailContent = await spark.llm(prompt, 'gpt-4o-mini', true);
-    let parsedEmail: { subject?: string; body: string };
-    try {
-      parsedEmail = JSON.parse(emailContent);
-    } catch {
-      parsedEmail = { subject: 'New service request', body: String(emailContent) };
-    }
-
-    const transporter = createTransporter();
     await transporter.sendMail({
       from: process.env.FROM_EMAIL || process.env.SMTP_USER,
       to: OWNER_EMAIL,
-      subject: parsedEmail.subject ?? 'New service request',
-      text: parsedEmail.body,
+      subject: `New Service Request - ${submission.name} - ${submission.year} ${submission.make} ${submission.model}`,
+      text: emailBody,
     });
 
     return res.status(200).json({ ok: true });
