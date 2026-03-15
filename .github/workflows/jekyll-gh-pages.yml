@@ -44,7 +44,7 @@ jobs:
         run: |
           echo "Inspecting _site ownership:"
           ls -la ./_site || true
-          echo "greenwoodmobilemechanic.com" | sudo tee ./_site/CNAME > /dev/null
+          echo "greenwoods24hourmobilemechanic.com" | sudo tee ./_site/CNAME > /dev/null
           echo "Wrote CNAME; listing _site:"
           ls -la ./_site || true
 
