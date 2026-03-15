@@ -184,7 +184,7 @@ function App() {
             <p className="text-lg md:text-xl text-white/90 leading-relaxed mb-8 max-w-2xl">
               Professional automotive repair and maintenance that comes to you. Fast, reliable, and always available when you need us most.
             </p>
-            <div className="flex flex-col sm:flex-row gap-4">
+            <div className="flex flex-col sm:flex-row gap-4 items-start">
               <Button onClick={handleCall} size="lg" className="bg-accent hover:bg-accent/90 text-accent-foreground font-[family-name:var(--font-space)] font-bold text-lg tracking-wide uppercase gap-3 hover:scale-105 transition-transform">
                 <Phone weight="bold" size={24} />
                 Call Now
@@ -231,7 +231,7 @@ function App() {
                   transition={{ duration: 0.5, delay: index * 0.1 }}
                 >
                   <Card className="p-6 hover:shadow-lg transition-all duration-300 hover:-translate-y-1 border-border h-full">
-                    <div className="w-14 h-14 rounded-full bg-accent/10 flex items-center justify-center mb-4">
+                    <div className="w-14 h-14 rounded-full bg-accent/15 flex items-center justify-center mb-4 shrink-0">
                       <Icon size={28} weight="duotone" className="text-accent" />
                     </div>
                     <h3 className="font-[family-name:var(--font-space)] font-semibold text-xl mb-2 text-foreground">
@@ -277,8 +277,8 @@ function App() {
                   transition={{ duration: 0.5, delay: index * 0.1 }}
                   className="text-center"
                 >
-                  <div className="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center mb-4 mx-auto">
-                    <Icon size={32} weight="duotone" className="text-primary" />
+                  <div className="w-16 h-16 rounded-full bg-accent/15 flex items-center justify-center mb-4 mx-auto shrink-0">
+                    <Icon size={32} weight="duotone" className="text-accent" />
                   </div>
                   <h3 className="font-[family-name:var(--font-space)] font-semibold text-lg mb-2 text-foreground">
                     {benefit.title}
