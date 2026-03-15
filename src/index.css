@@ -96,6 +96,30 @@
   --font-inter: 'Inter', system-ui, sans-serif;
 }
 
+.icon-circle-sm {
+  width: 3.5rem;
+  height: 3.5rem;
+  min-width: 3.5rem;
+  min-height: 3.5rem;
+  border-radius: 9999px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: oklch(0.72 0.20 130 / 0.15);
+}
+
+.icon-circle-md {
+  width: 4rem;
+  height: 4rem;
+  min-width: 4rem;
+  min-height: 4rem;
+  border-radius: 9999px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: oklch(0.72 0.20 130 / 0.15);
+}
+
 .hero-gradient {
   background: linear-gradient(135deg, #0d1a0d 0%, #1a3a1a 40%, #0d0d0d 100%);
   position: relative;
