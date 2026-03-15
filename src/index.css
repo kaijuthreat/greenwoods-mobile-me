@@ -12,33 +12,37 @@
 }
 
 :root {
-  --background: oklch(0.98 0.005 90);
-  --foreground: oklch(0.18 0.02 255);
+  /* Black background feel */
+  --background: oklch(0.96 0 0);
+  --foreground: oklch(0.12 0 0);
 
   --card: oklch(1 0 0);
-  --card-foreground: oklch(0.18 0.02 255);
+  --card-foreground: oklch(0.12 0 0);
 
   --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.18 0.02 255);
+  --popover-foreground: oklch(0.12 0 0);
 
-  --primary: oklch(0.22 0.04 255);
+  /* Deep forest green as primary (footer, "Why Choose Us" icons) */
+  --primary: oklch(0.22 0.08 145);
   --primary-foreground: oklch(0.98 0 0);
 
-  --secondary: oklch(0.90 0.02 255);
-  --secondary-foreground: oklch(0.18 0.02 255);
+  /* Lime/yellow-green as secondary */
+  --secondary: oklch(0.88 0.12 130);
+  --secondary-foreground: oklch(0.12 0 0);
 
-  --muted: oklch(0.95 0.01 255);
-  --muted-foreground: oklch(0.50 0.03 255);
+  --muted: oklch(0.94 0.01 130);
+  --muted-foreground: oklch(0.50 0.02 130);
 
-  --accent: oklch(0.72 0.19 45);
-  --accent-foreground: oklch(0.15 0 0);
+  /* Bright lime green as accent (buttons, badges, CTA elements) */
+  --accent: oklch(0.72 0.20 130);
+  --accent-foreground: oklch(0.08 0 0);
 
   --destructive: oklch(0.55 0.22 25);
   --destructive-foreground: oklch(0.98 0 0);
 
-  --border: oklch(0.88 0.02 255);
-  --input: oklch(0.88 0.02 255);
-  --ring: oklch(0.72 0.19 45);
+  --border: oklch(0.88 0.02 130);
+  --input: oklch(0.88 0.02 130);
+  --ring: oklch(0.72 0.20 130);
 
   --radius: 0.75rem;
 }
@@ -76,20 +80,20 @@
 }
 
 .hero-gradient {
-  background: linear-gradient(135deg, oklch(0.22 0.04 255) 0%, oklch(0.15 0.03 255) 100%);
+  background: linear-gradient(135deg, #0d1a0d 0%, #1a3a1a 40%, #0d0d0d 100%);
   position: relative;
+  overflow: hidden;
 }
 
 .hero-gradient::before {
   content: '';
   position: absolute;
   inset: 0;
-  background-image: repeating-linear-gradient(
-    45deg,
+  background: repeating-linear-gradient(
+    -45deg,
     transparent,
-    transparent 35px,
-    oklch(0.72 0.19 45 / 0.15) 35px,
-    oklch(0.72 0.19 45 / 0.15) 70px
+    transparent 40px,
+    rgba(124, 181, 24, 0.03) 40px,
+    rgba(124, 181, 24, 0.03) 80px
   );
-  pointer-events: none;
 }
