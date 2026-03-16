@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion'
-import { Phone, Wrench, Clock, MapPin, Lightning, CheckCircle, Gauge, Drop, BatteryCharging, Hammer, PaperPlaneRight, Images, Star, Quotes, ArrowRight, ShieldCheck } from '@phosphor-icons/react'
+import { Phone, Wrench, Clock, MapPin, Lightning, CheckCircle, Gauge, Drop, BatteryCharging, Hammer, PaperPlaneRight, Star, ArrowRight, ShieldCheck } from '@phosphor-icons/react'
 import { Button } from '@/components/ui/button'
 import { Card } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
@@ -188,7 +188,7 @@ function App() {
               <button
                 key={link.id}
                 onClick={() => document.getElementById(link.id)?.scrollIntoView({ behavior: 'smooth' })}
-                className="text-sm font-[family-name:var(--font-space)] font-medium text-foreground/75 hover:text-accent transition-colors"
+                className="text-sm font-[family-name:var(--font-space)] font-medium text-foreground/75 hover:text-accent transition-colors px-2 py-1 hover:underline underline-offset-4"
               >
                 {link.label}
               </button>
@@ -201,7 +201,7 @@ function App() {
         </div>
       </header>
 
-      <section className="hero-gradient pt-24 pb-16 md:pt-32 md:pb-24 px-6 overflow-hidden">
+      <section className="hero-gradient min-h-[85vh] flex items-center py-28 px-6 overflow-hidden">
         <div className="max-w-7xl mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -247,7 +247,7 @@ function App() {
         </div>
       </section>
 
-      <section id="services" className="py-16 md:py-24 px-6 bg-muted/30">
+      <section id="services" className="py-20 px-6 bg-muted/30">
         <div className="max-w-7xl mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -256,11 +256,6 @@ function App() {
             transition={{ duration: 0.5 }}
             className="text-center mb-12 md:mb-16"
           >
-            <div className="flex items-center justify-center mb-4">
-              <div className="w-12 h-12 rounded-full bg-accent flex items-center justify-center">
-                <Wrench size={22} weight="duotone" className="text-accent-foreground" />
-              </div>
-            </div>
             <h2 className="font-[family-name:var(--font-space)] font-bold text-3xl md:text-4xl text-foreground tracking-tight">
               Our Services
             </h2>
@@ -270,7 +265,7 @@ function App() {
             </p>
           </motion.div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {services.map((service, index) => {
               const Icon = service.icon
               return (
@@ -281,14 +276,16 @@ function App() {
                   viewport={{ once: true }}
                   transition={{ duration: 0.5, delay: index * 0.1 }}
                 >
-                  <Card className="p-6 hover:shadow-lg transition-[transform,box-shadow] duration-200 hover:-translate-y-1 border-border h-full service-card group flex flex-col">
-                    <div className="icon-circle-md mb-4">
-                      <Icon size={32} weight="duotone" className="text-accent" />
+                  <Card className="p-5 hover:shadow-lg transition-[transform,box-shadow] duration-200 hover:-translate-y-1 border-border h-full service-card group flex flex-col">
+                    <div className="flex items-center gap-3 mb-3">
+                      <div className="icon-circle-sm shrink-0">
+                        <Icon size={22} weight="duotone" className="text-accent" />
+                      </div>
+                      <h3 className="font-[family-name:var(--font-space)] font-bold text-lg text-foreground leading-tight">
+                        {service.title}
+                      </h3>
                     </div>
-                    <h3 className="font-[family-name:var(--font-space)] font-bold text-xl mb-2 text-foreground">
-                      {service.title}
-                    </h3>
-                    <p className="text-muted-foreground leading-relaxed flex-1">
+                    <p className="text-muted-foreground text-sm leading-relaxed flex-1">
                       {service.description}
                     </p>
                     <div className="flex items-center gap-1.5 text-accent text-sm font-[family-name:var(--font-space)] font-semibold mt-4 opacity-0 group-hover:opacity-100 transition-opacity duration-200">
@@ -303,7 +300,7 @@ function App() {
         </div>
       </section>
 
-      <section id="why-us" className="py-16 md:py-24 px-6 bg-background">
+      <section id="why-us" className="py-20 px-6 bg-background">
         <div className="max-w-7xl mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -312,11 +309,6 @@ function App() {
             transition={{ duration: 0.5 }}
             className="text-center mb-12 md:mb-16"
           >
-            <div className="flex items-center justify-center mb-4">
-              <div className="w-12 h-12 rounded-full bg-accent flex items-center justify-center">
-                <CheckCircle size={22} weight="duotone" className="text-accent-foreground" />
-              </div>
-            </div>
             <h2 className="font-[family-name:var(--font-space)] font-bold text-3xl md:text-4xl text-foreground tracking-tight">
               Why Choose Us
             </h2>
@@ -326,7 +318,7 @@ function App() {
             </p>
           </motion.div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {benefits.map((benefit, index) => {
               const Icon = benefit.icon
               return (
@@ -337,16 +329,18 @@ function App() {
                   viewport={{ once: true }}
                   transition={{ duration: 0.5, delay: index * 0.1 }}
                 >
-                  <Card className="p-6 text-center h-full hover:shadow-md transition-[transform,box-shadow] duration-200 hover:-translate-y-1 relative overflow-hidden">
-                    <span className="absolute top-3 right-4 font-[family-name:var(--font-space)] font-bold text-4xl text-muted-foreground/12 leading-none select-none pointer-events-none">
+                  <Card className="p-5 h-full hover:shadow-md transition-[transform,box-shadow] duration-200 hover:-translate-y-1">
+                    <span className="text-xs font-[family-name:var(--font-space)] font-bold text-muted-foreground/60 uppercase tracking-widest mb-3 block">
                       {String(index + 1).padStart(2, '0')}
                     </span>
-                    <div className="icon-circle-md mx-auto mb-4">
-                      <Icon size={32} weight="duotone" className="text-accent" />
+                    <div className="flex items-center gap-3 mb-3">
+                      <div className="icon-circle-sm shrink-0">
+                        <Icon size={22} weight="duotone" className="text-accent" />
+                      </div>
+                      <h3 className="font-[family-name:var(--font-space)] font-bold text-base text-foreground leading-tight">
+                        {benefit.title}
+                      </h3>
                     </div>
-                    <h3 className="font-[family-name:var(--font-space)] font-bold text-lg mb-2 text-foreground">
-                      {benefit.title}
-                    </h3>
                     <p className="text-muted-foreground text-sm leading-relaxed">
                       {benefit.description}
                     </p>
@@ -360,7 +354,7 @@ function App() {
 
       <Separator />
 
-      <section id="gallery" className="py-16 md:py-24 px-6 bg-muted/30">
+      <section id="gallery" className="py-20 px-6 bg-muted/30">
         <div className="max-w-7xl mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -369,11 +363,6 @@ function App() {
             transition={{ duration: 0.5 }}
             className="text-center mb-12 md:mb-16"
           >
-            <div className="flex items-center justify-center mb-4">
-              <div className="w-12 h-12 rounded-full bg-accent flex items-center justify-center">
-                <Images size={24} weight="duotone" className="text-accent-foreground" />
-              </div>
-            </div>
             <h2 className="font-[family-name:var(--font-space)] font-bold text-3xl md:text-4xl text-foreground tracking-tight">
               Our Work Gallery
             </h2>
@@ -383,7 +372,7 @@ function App() {
             </p>
           </motion.div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {galleryImages.map((item, index) => {
               const GalleryIcon = galleryIconMap[item.category] || Wrench
               return (
@@ -451,7 +440,7 @@ function App() {
 
       <Separator />
 
-      <section id="testimonials" className="py-16 md:py-24 px-6 bg-background">
+      <section id="testimonials" className="py-20 px-6 bg-background">
         <div className="max-w-7xl mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -460,11 +449,6 @@ function App() {
             transition={{ duration: 0.5 }}
             className="text-center mb-12 md:mb-16"
           >
-            <div className="flex items-center justify-center mb-4">
-              <div className="w-12 h-12 rounded-full bg-accent flex items-center justify-center">
-                <Quotes size={24} weight="duotone" className="text-accent-foreground" />
-              </div>
-            </div>
             <h2 className="font-[family-name:var(--font-space)] font-bold text-3xl md:text-4xl text-foreground tracking-tight">
               What Our Customers Say
             </h2>
@@ -474,7 +458,7 @@ function App() {
             </p>
           </motion.div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {testimonials.map((testimonial, index) => {
               const initials = testimonial.name
                 .split(' ')
@@ -561,7 +545,7 @@ function App() {
 
       <Separator />
 
-      <section id="contact" className="py-16 md:py-24 px-6 bg-muted/30">
+      <section id="contact" className="py-20 px-6 bg-muted/30">
         <div className="max-w-2xl mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
