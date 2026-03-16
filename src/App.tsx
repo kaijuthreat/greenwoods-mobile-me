@@ -145,7 +145,7 @@ function App() {
       <Star
         key={index}
         weight={index < rating ? 'fill' : 'regular'}
-        className={index < rating ? 'text-accent' : 'text-muted-foreground/30'}
+        className={index < rating ? 'gold-star' : 'text-muted-foreground/30'}
         size={18}
       />
     ))
@@ -172,11 +172,13 @@ function App() {
 
   return (
     <div className="min-h-screen font-[family-name:var(--font-inter)]">
-      <header className="fixed top-0 left-0 right-0 z-50 bg-background/95 backdrop-blur-sm border-b-2 border-border">
+      {/* Racing stripe accent at top */}
+      <div className="h-1 bg-[#b00000] w-full fixed top-0 left-0 right-0 z-[60]" />
+      <header className="fixed top-1 left-0 right-0 z-50 bg-background/95 backdrop-blur-sm border-b-2 border-border">
         <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between gap-6">
           <div className="flex items-center gap-3 shrink-0">
-            <div className="w-10 h-10 rounded-full bg-accent flex items-center justify-center">
-              <Wrench className="text-accent-foreground" size={24} weight="bold" />
+            <div className="w-10 h-10 rounded-full bg-[#0d2a0f] border-2 border-[#7bc418] flex items-center justify-center">
+              <Wrench className="text-[#7bc418]" size={22} weight="bold" />
             </div>
             <div>
               <h1 className="font-[family-name:var(--font-space)] font-bold text-lg leading-none">Greenwood's</h1>
@@ -194,15 +196,23 @@ function App() {
               </button>
             ))}
           </nav>
-          <Button onClick={handleCall} size="sm" variant="default" className="bg-accent hover:bg-accent/90 text-accent-foreground gap-2 shrink-0">
+          <Button onClick={handleCall} size="sm" variant="default" className="bg-accent hover:bg-[#b00000] text-accent-foreground hover:text-white gap-2 shrink-0 transition-colors duration-200">
             <Phone weight="bold" size={18} />
             <span className="hidden sm:inline">Call Now</span>
           </Button>
         </div>
       </header>
 
-      <section className="hero-gradient min-h-[85vh] flex items-center py-28 px-6 overflow-hidden">
-        <div className="max-w-7xl mx-auto">
+      <section className="hero-gradient min-h-screen flex items-center py-32 px-6 overflow-hidden relative">
+        {/* Decorative red vertical bar on right side */}
+        <div className="absolute right-0 top-0 bottom-0 w-2 bg-gradient-to-b from-[#b00000] via-[#7a0000] to-transparent opacity-80" />
+        {/* Red glow overlay */}
+        <div className="hero-glow-red" />
+        {/* Decorative watermark gear */}
+        <div className="absolute right-8 top-1/2 -translate-y-1/2 opacity-5 pointer-events-none hidden lg:block">
+          <Wrench size={320} weight="fill" className="text-white rotate-12" />
+        </div>
+        <div className="max-w-7xl mx-auto relative z-10">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -210,11 +220,11 @@ function App() {
             className="max-w-4xl space-y-8"
           >
             <div className="space-y-4">
-              <Badge className="bg-accent/20 text-accent-foreground border-accent/40 hover:bg-accent/25 font-[family-name:var(--font-space)] font-semibold uppercase tracking-wider">
+              <Badge className="bg-[#7bc418] text-[#0a0a0a] border-[#9ed42a] hover:bg-[#9ed42a] font-[family-name:var(--font-space)] font-semibold uppercase tracking-wider">
                 <Clock weight="bold" size={16} className="mr-1.5" />
                 24/7 Available
               </Badge>
-              <h1 className="font-[family-name:var(--font-space)] font-bold text-4xl md:text-5xl lg:text-6xl text-white leading-none tracking-tight">
+              <h1 className="font-[family-name:var(--font-space)] font-bold text-5xl md:text-6xl lg:text-7xl text-white leading-none tracking-tight">
                 Expert Mobile Mechanic Services, Anytime, Anywhere
               </h1>
               <p className="text-lg md:text-xl text-white/90 leading-relaxed max-w-2xl">
@@ -238,7 +248,7 @@ function App() {
             <div className="flex flex-wrap gap-3 pt-2">
               {trustStats.map(({ label, icon: TrustIcon }) => (
                 <span key={label} className="stat-pill font-[family-name:var(--font-space)]">
-                  <TrustIcon weight="fill" size={14} className="text-accent" />
+                  <TrustIcon weight="fill" size={14} className="text-[#7bc418]" />
                   {label}
                 </span>
               ))}
@@ -247,16 +257,16 @@ function App() {
         </div>
       </section>
 
-      <section id="services" className="py-20 px-6 bg-muted/40">
+      <section id="services" className="py-24 md:py-32 px-6 bg-stone-50">
         <div className="max-w-7xl mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5 }}
-            className="text-center mb-10"
+            className="text-center mb-12"
           >
-            <h2 className="font-[family-name:var(--font-space)] font-bold text-3xl md:text-4xl text-foreground tracking-tight">
+            <h2 className="font-[family-name:var(--font-space)] font-bold text-4xl md:text-5xl text-foreground tracking-tight">
               Our Services
             </h2>
             <span className="section-header-line"></span>
@@ -265,9 +275,10 @@ function App() {
             </p>
           </motion.div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
             {services.map((service, index) => {
               const Icon = service.icon
+              const isEmergency = service.title === 'Emergency Repairs'
               return (
                 <motion.div
                   key={service.title}
@@ -276,19 +287,19 @@ function App() {
                   viewport={{ once: true }}
                   transition={{ duration: 0.5, delay: index * 0.1 }}
                 >
-                  <Card className="p-5 hover:shadow-lg transition-[transform,box-shadow] duration-200 hover:-translate-y-1 border-border h-full service-card group flex flex-col">
-                    <div className="flex items-center gap-3 mb-3">
-                      <div className="icon-circle-sm shrink-0">
-                        <Icon size={18} weight="duotone" className="text-accent" />
+                  <Card className={`p-7 hover:shadow-xl transition-[transform,box-shadow] duration-200 hover:-translate-y-1 border-border h-full service-card group flex flex-col ${isEmergency ? 'service-card-red' : ''}`}>
+                    <div className="flex items-center gap-4 mb-4">
+                      <div className={`icon-circle-md shrink-0 ${isEmergency ? 'bg-[#b00000]/15' : ''}`}>
+                        <Icon size={24} weight="duotone" className={isEmergency ? 'text-[#b00000]' : 'text-accent'} />
                       </div>
-                      <h3 className="font-[family-name:var(--font-space)] font-bold text-lg text-foreground leading-tight">
+                      <h3 className={`font-[family-name:var(--font-space)] font-bold text-xl text-foreground leading-tight ${isEmergency ? 'text-[#b00000]' : ''}`}>
                         {service.title}
                       </h3>
                     </div>
                     <p className="text-muted-foreground text-sm leading-relaxed flex-1">
                       {service.description}
                     </p>
-                    <div className="flex items-center gap-1.5 text-accent text-sm font-[family-name:var(--font-space)] font-semibold mt-4 opacity-0 group-hover:opacity-100 transition-opacity duration-200">
+                    <div className={`flex items-center gap-1.5 text-sm font-[family-name:var(--font-space)] font-semibold mt-4 opacity-0 group-hover:opacity-100 transition-opacity duration-200 ${isEmergency ? 'text-[#b00000]' : 'text-accent'}`}>
                       <span>Learn more</span>
                       <ArrowRight size={14} weight="bold" />
                     </div>
@@ -300,25 +311,25 @@ function App() {
         </div>
       </section>
 
-      <section id="why-us" className="py-20 px-6 bg-background">
+      <section id="why-us" className="py-24 md:py-32 px-6 bg-[#0d2a0f]">
         <div className="max-w-7xl mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5 }}
-            className="text-center mb-10"
+            className="text-center mb-12"
           >
-            <h2 className="font-[family-name:var(--font-space)] font-bold text-3xl md:text-4xl text-foreground tracking-tight">
+            <h2 className="font-[family-name:var(--font-space)] font-bold text-4xl md:text-5xl text-white tracking-tight">
               Why Choose Us
             </h2>
             <span className="section-header-line"></span>
-            <p className="text-muted-foreground text-lg max-w-2xl mx-auto mt-4">
+            <p className="text-white/70 text-lg max-w-2xl mx-auto mt-4">
               Experience the difference with our professional mobile mechanic services
             </p>
           </motion.div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
             {benefits.map((benefit, index) => {
               const Icon = benefit.icon
               return (
@@ -329,19 +340,19 @@ function App() {
                   viewport={{ once: true }}
                   transition={{ duration: 0.5, delay: index * 0.1 }}
                 >
-                  <Card className="p-5 hover:shadow-md transition-[transform,box-shadow] duration-200 hover:-translate-y-1">
-                    <div className="flex items-center gap-3 mb-3">
-                      <div className="icon-circle-sm shrink-0">
-                        <Icon size={18} weight="duotone" className="text-accent" />
+                  <div className="benefit-card-accent p-6 md:p-8 rounded-xl hover:shadow-2xl hover:shadow-black/40 transition-[transform,box-shadow] duration-200 hover:-translate-y-1 h-full">
+                    <div className="flex flex-col items-start gap-4 mb-4">
+                      <div className="icon-circle-md shrink-0 bg-[#7bc418]/20">
+                        <Icon size={24} weight="duotone" className="text-[#7bc418]" />
                       </div>
-                      <h3 className="font-[family-name:var(--font-space)] font-bold text-base text-foreground leading-tight">
+                      <h3 className="font-[family-name:var(--font-space)] font-bold text-lg text-white leading-tight">
                         {benefit.title}
                       </h3>
                     </div>
-                    <p className="text-muted-foreground text-sm leading-relaxed">
+                    <p className="text-white/70 text-sm leading-relaxed">
                       {benefit.description}
                     </p>
-                  </Card>
+                  </div>
                 </motion.div>
               )
             })}
@@ -349,16 +360,16 @@ function App() {
         </div>
       </section>
 
-      <section id="gallery" className="py-20 px-6 bg-muted/40">
+      <section id="gallery" className="py-24 md:py-32 px-6 bg-muted/40">
         <div className="max-w-7xl mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5 }}
-            className="text-center mb-10"
+            className="text-center mb-12"
           >
-            <h2 className="font-[family-name:var(--font-space)] font-bold text-3xl md:text-4xl text-foreground tracking-tight">
+            <h2 className="font-[family-name:var(--font-space)] font-bold text-4xl md:text-5xl text-foreground tracking-tight">
               Our Work Gallery
             </h2>
             <span className="section-header-line"></span>
@@ -367,9 +378,10 @@ function App() {
             </p>
           </motion.div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
             {galleryImages.map((item, index) => {
               const GalleryIcon = galleryIconMap[item.category] || Wrench
+              const isOdd = index % 2 !== 0
               return (
                 <motion.div
                   key={item.id}
@@ -381,16 +393,18 @@ function App() {
                   <Dialog>
                     <DialogTrigger asChild>
                       <Card 
-                        className="overflow-hidden cursor-pointer group border-border hover:shadow-xl transition-all duration-300 hover:-translate-y-1"
+                        className={`overflow-hidden cursor-pointer group border-border hover:shadow-xl transition-all duration-300 hover:-translate-y-1 hover:border-[#c8960c]`}
                         onClick={() => setSelectedImage(item)}
                       >
-                        <div className="gallery-placeholder relative aspect-[16/10] overflow-hidden">
+                        <div className={`${isOdd ? 'gallery-placeholder-red' : 'gallery-placeholder'} relative min-h-[280px] aspect-[16/10] overflow-hidden`}>
                           <div className="absolute inset-0 z-0 flex items-center justify-center">
-                            <GalleryIcon size={64} weight="duotone" className="text-white/15 group-hover:scale-110 transition-transform duration-500" aria-hidden="true" />
+                            <GalleryIcon size={80} weight="duotone" className="text-white/15 group-hover:scale-110 transition-transform duration-500" aria-hidden="true" />
                           </div>
                           <div className="absolute inset-0 z-10 bg-gradient-to-t from-black/85 via-black/20 to-transparent" />
                           <div className="absolute top-3 right-3 z-20">
-                            <Badge className="bg-accent text-accent-foreground border-0 font-[family-name:var(--font-space)] font-semibold text-xs">
+                            <Badge 
+                              className={`border-0 font-[family-name:var(--font-space)] font-semibold text-xs ${isOdd ? 'bg-[#b00000] text-white' : 'bg-[#7bc418] text-[#0a0a0a]'}`}
+                            >
                               {item.category}
                             </Badge>
                           </div>
@@ -406,12 +420,12 @@ function App() {
                       </Card>
                     </DialogTrigger>
                     <DialogContent className="max-w-4xl p-0 overflow-hidden border-border">
-                      <div className="gallery-placeholder relative w-full h-64 md:h-80">
+                      <div className={`${isOdd ? 'gallery-placeholder-red' : 'gallery-placeholder'} relative w-full h-64 md:h-80`}>
                         <div className="absolute inset-0 flex items-center justify-center">
                           <GalleryIcon size={100} weight="duotone" className="text-white/25" aria-hidden="true" />
                         </div>
                         <div className="absolute top-4 right-4">
-                          <Badge className="bg-accent text-accent-foreground border-0 font-[family-name:var(--font-space)] font-semibold text-base px-4 py-1.5">
+                          <Badge className={`border-0 font-[family-name:var(--font-space)] font-semibold text-base px-4 py-1.5 ${isOdd ? 'bg-[#b00000] text-white' : 'bg-[#7bc418] text-[#0a0a0a]'}`}>
                             {item.category}
                           </Badge>
                         </div>
@@ -433,16 +447,16 @@ function App() {
         </div>
       </section>
 
-      <section id="testimonials" className="py-20 px-6 bg-background">
+      <section id="testimonials" className="py-24 md:py-32 px-6 bg-background">
         <div className="max-w-7xl mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5 }}
-            className="text-center mb-10"
+            className="text-center mb-12"
           >
-            <h2 className="font-[family-name:var(--font-space)] font-bold text-3xl md:text-4xl text-foreground tracking-tight">
+            <h2 className="font-[family-name:var(--font-space)] font-bold text-4xl md:text-5xl text-foreground tracking-tight">
               What Our Customers Say
             </h2>
             <span className="section-header-line"></span>
@@ -451,12 +465,13 @@ function App() {
             </p>
           </motion.div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
             {testimonials.map((testimonial, index) => {
               const initials = testimonial.name
                 .split(' ')
                 .map(n => n[0])
                 .join('')
+              const isOdd = index % 2 !== 0
               
               return (
                 <motion.div
@@ -466,10 +481,10 @@ function App() {
                   viewport={{ once: true }}
                   transition={{ duration: 0.5, delay: index * 0.1 }}
                 >
-                  <Card className="p-6 hover:shadow-lg transition-all duration-300 hover:-translate-y-1 border-border h-full flex flex-col">
+                  <Card className="p-6 md:p-8 hover:shadow-lg transition-all duration-300 hover:-translate-y-1 border-border h-full flex flex-col">
                     <div className="flex items-start gap-4 mb-4">
-                      <Avatar className="w-12 h-12 border-2 border-accent/20">
-                        <AvatarFallback className="bg-accent/10 text-accent font-[family-name:var(--font-space)] font-bold">
+                      <Avatar className="w-16 h-16 border-2 border-[#7bc418]/30 shrink-0">
+                        <AvatarFallback className="bg-[#0d2a0f] text-[#7bc418] font-[family-name:var(--font-space)] font-bold text-lg">
                           {initials}
                         </AvatarFallback>
                       </Avatar>
@@ -493,7 +508,9 @@ function App() {
                     </p>
 
                     <div className="flex items-center justify-between pt-4 border-t border-border">
-                      <Badge variant="secondary" className="font-[family-name:var(--font-space)] font-medium text-xs">
+                      <Badge 
+                        className={`font-[family-name:var(--font-space)] font-medium text-xs border-0 ${isOdd ? 'bg-[#b00000]/10 text-[#b00000]' : 'bg-[#7bc418]/15 text-[#0d2a0f]'}`}
+                      >
                         {testimonial.service}
                       </Badge>
                       <span className="text-xs text-muted-foreground">
@@ -536,7 +553,7 @@ function App() {
         </div>
       </section>
 
-      <section id="contact" className="py-20 px-6 bg-muted/40">
+      <section id="contact" className="py-24 md:py-32 px-6 bg-stone-50">
         <div className="max-w-2xl mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -545,7 +562,7 @@ function App() {
             transition={{ duration: 0.5 }}
             className="text-center"
           >
-            <h2 className="font-[family-name:var(--font-space)] font-bold text-3xl md:text-4xl text-foreground tracking-tight mb-4">
+            <h2 className="font-[family-name:var(--font-space)] font-bold text-4xl md:text-5xl text-foreground tracking-tight mb-4">
               Contact Us
             </h2>
             <p className="text-muted-foreground text-lg mb-8">
@@ -556,7 +573,7 @@ function App() {
               <Button 
                 onClick={() => window.open(GOOGLE_FORM_ACTION.replace('/formResponse', '/viewform'), '_blank')}
                 size="lg" 
-                className="bg-accent hover:bg-accent/90 text-accent-foreground font-[family-name:var(--font-space)] font-bold text-lg tracking-wide uppercase gap-3 hover:scale-105 transition-transform px-8 py-6"
+                className="bg-accent hover:bg-[#b00000] text-accent-foreground hover:text-white font-[family-name:var(--font-space)] font-bold text-lg tracking-wide uppercase gap-3 hover:scale-105 transition-all duration-200 px-8 py-6"
               >
                 <PaperPlaneRight weight="bold" size={24} />
                 Let Us Know Your Car's Problem
@@ -568,7 +585,7 @@ function App() {
                 </div>
                 <a 
                   href="tel:+17063020163" 
-                  className="text-2xl font-[family-name:var(--font-space)] font-bold text-accent hover:text-accent/80 transition-colors"
+                  className="text-2xl font-[family-name:var(--font-space)] font-bold text-[#c8960c] hover:text-[#e0a800] transition-colors"
                 >
                   (706) 302-0163
                 </a>
@@ -582,7 +599,7 @@ function App() {
                     Email
                   </h4>
                   <a 
-                    href="mailto:service@greenwoodmobilemechanic.com" 
+                    href="mailto:greenwoodc233@gmail.com" 
                     className="text-muted-foreground hover:text-accent transition-colors"
                   >
                     greenwoodc233@gmail.com
@@ -602,13 +619,14 @@ function App() {
         </div>
       </section>
 
-      <footer className="bg-primary text-primary-foreground py-12 px-6">
+      <footer className="bg-[#0d2a0f] text-[#f5f5f5] py-12 px-6">
+        {/* Crimson red accent line between logo area and links */}
         <div className="max-w-7xl mx-auto">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-6">
             <div>
               <div className="flex items-center gap-3 mb-4">
-                <div className="w-10 h-10 rounded-full bg-accent flex items-center justify-center shrink-0">
-                  <Wrench className="text-accent-foreground" size={24} weight="bold" />
+                <div className="w-10 h-10 rounded-full bg-[#152e18] border-2 border-[#7bc418] flex items-center justify-center shrink-0">
+                  <Wrench className="text-[#7bc418]" size={22} weight="bold" />
                 </div>
                 <div>
                   <h3 className="font-[family-name:var(--font-space)] font-bold text-lg leading-none">Greenwood's</h3>
@@ -626,7 +644,7 @@ function App() {
                   <li key={link.id}>
                     <button
                       onClick={() => document.getElementById(link.id)?.scrollIntoView({ behavior: 'smooth' })}
-                      className="text-sm opacity-75 hover:text-accent hover:opacity-100 transition-all font-[family-name:var(--font-space)]"
+                      className="text-sm opacity-75 hover:text-[#c8960c] hover:opacity-100 transition-all font-[family-name:var(--font-space)]"
                     >
                       {link.label}
                     </button>
@@ -637,11 +655,11 @@ function App() {
             <div>
               <h4 className="font-[family-name:var(--font-space)] font-semibold mb-4 text-sm uppercase tracking-wider opacity-90">Contact Us</h4>
               <div className="space-y-3">
-                <a href="tel:+17063020163" className="flex items-center gap-2 text-sm opacity-80 hover:text-accent hover:opacity-100 transition-all">
+                <a href="tel:+17063020163" className="flex items-center gap-2 text-sm opacity-80 hover:text-[#c8960c] hover:opacity-100 transition-all">
                   <Phone size={16} weight="fill" />
                   (706) 302-0163
                 </a>
-                <a href="mailto:greenwoodc233@gmail.com" className="flex items-center gap-2 text-sm opacity-80 hover:text-accent hover:opacity-100 transition-all">
+                <a href="mailto:greenwoodc233@gmail.com" className="flex items-center gap-2 text-sm opacity-80 hover:text-[#c8960c] hover:opacity-100 transition-all">
                   <PaperPlaneRight size={16} weight="fill" />
                   greenwoodc233@gmail.com
                 </a>
@@ -652,7 +670,8 @@ function App() {
               </div>
             </div>
           </div>
-          <div className="border-t border-primary-foreground/20 pt-6 text-center">
+          <div className="h-px bg-[#b00000] mb-6 opacity-70" />
+          <div className="text-center">
             <p className="text-sm opacity-70">
               © {new Date().getFullYear()} Greenwood's Mobile Mechanic Services. All rights reserved.
             </p>
