@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion'
-import { Phone, Wrench, Clock, MapPin, Lightning, CheckCircle, Gauge, Drop, BatteryCharging, Hammer, PaperPlaneRight, Images, Star, Quotes } from '@phosphor-icons/react'
+import { Phone, Wrench, Clock, MapPin, Lightning, CheckCircle, Gauge, Drop, BatteryCharging, Hammer, PaperPlaneRight, Images, Star, Quotes, ArrowRight, ShieldCheck } from '@phosphor-icons/react'
 import { Button } from '@/components/ui/button'
 import { Card } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
@@ -7,6 +7,15 @@ import { Separator } from '@/components/ui/separator'
 import { Dialog, DialogContent, DialogTrigger } from '@/components/ui/dialog'
 import { Avatar, AvatarFallback } from '@/components/ui/avatar'
 import { useState } from 'react'
+
+const galleryIconMap: Record<string, React.ElementType> = {
+  'Engine Work': Wrench,
+  'Brake Service': Gauge,
+  'Transmission': Hammer,
+  'Electrical': Lightning,
+  'Maintenance': Drop,
+  'Suspension': BatteryCharging,
+}
 
 function App() {
   const GOOGLE_FORM_ACTION = 'https://docs.google.com/forms/d/e/1FAIpQLSfbz658-jNCCwfeg-Cx53tmGQZa4NgeRNkJ7K2Dg4sRta8XGA/formResponse';
@@ -146,11 +155,26 @@ function App() {
     window.location.href = 'tel:+17063020163'
   }
 
+  const navLinks = [
+    { label: 'Services', id: 'services' },
+    { label: 'Why Us', id: 'why-us' },
+    { label: 'Gallery', id: 'gallery' },
+    { label: 'Testimonials', id: 'testimonials' },
+    { label: 'Contact', id: 'contact' },
+  ]
+
+  const trustStats = [
+    { label: '500+ Jobs Completed', icon: CheckCircle },
+    { label: '24/7 Service', icon: Clock },
+    { label: 'Licensed & Insured', icon: ShieldCheck },
+    { label: 'Same-Day Response', icon: Lightning },
+  ]
+
   return (
     <div className="min-h-screen font-[family-name:var(--font-inter)]">
-      <header className="fixed top-0 left-0 right-0 z-50 bg-background/95 backdrop-blur-sm border-b border-border">
-        <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
-          <div className="flex items-center gap-3">
+      <header className="fixed top-0 left-0 right-0 z-50 bg-background/95 backdrop-blur-sm border-b-2 border-border">
+        <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between gap-6">
+          <div className="flex items-center gap-3 shrink-0">
             <div className="w-10 h-10 rounded-full bg-accent flex items-center justify-center">
               <Wrench className="text-accent-foreground" size={24} weight="bold" />
             </div>
@@ -159,7 +183,18 @@ function App() {
               <p className="text-xs text-muted-foreground">Mobile Mechanic</p>
             </div>
           </div>
-          <Button onClick={handleCall} size="sm" variant="default" className="bg-accent hover:bg-accent/90 text-accent-foreground gap-2">
+          <nav className="hidden md:flex items-center gap-6">
+            {navLinks.map(link => (
+              <button
+                key={link.id}
+                onClick={() => document.getElementById(link.id)?.scrollIntoView({ behavior: 'smooth' })}
+                className="text-sm font-[family-name:var(--font-space)] font-medium text-foreground/75 hover:text-accent transition-colors"
+              >
+                {link.label}
+              </button>
+            ))}
+          </nav>
+          <Button onClick={handleCall} size="sm" variant="default" className="bg-accent hover:bg-accent/90 text-accent-foreground gap-2 shrink-0">
             <Phone weight="bold" size={18} />
             <span className="hidden sm:inline">Call Now</span>
           </Button>
@@ -200,6 +235,14 @@ function App() {
                 View Services
               </Button>
             </div>
+            <div className="flex flex-wrap gap-3 pt-2">
+              {trustStats.map(({ label, icon: TrustIcon }) => (
+                <span key={label} className="stat-pill font-[family-name:var(--font-space)]">
+                  <TrustIcon weight="fill" size={14} className="text-accent" />
+                  {label}
+                </span>
+              ))}
+            </div>
           </motion.div>
         </div>
       </section>
@@ -211,12 +254,18 @@ function App() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5 }}
-            className="text-center space-y-4 mb-12 md:mb-16"
+            className="text-center mb-12 md:mb-16"
           >
+            <div className="flex items-center justify-center mb-4">
+              <div className="w-12 h-12 rounded-full bg-accent flex items-center justify-center">
+                <Wrench size={22} weight="duotone" className="text-accent-foreground" />
+              </div>
+            </div>
             <h2 className="font-[family-name:var(--font-space)] font-bold text-3xl md:text-4xl text-foreground tracking-tight">
               Our Services
             </h2>
-            <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
+            <span className="section-header-line"></span>
+            <p className="text-muted-foreground text-lg max-w-2xl mx-auto mt-4">
               Comprehensive automotive solutions delivered right to your location
             </p>
           </motion.div>
@@ -232,16 +281,20 @@ function App() {
                   viewport={{ once: true }}
                   transition={{ duration: 0.5, delay: index * 0.1 }}
                 >
-                  <Card className="p-6 hover:shadow-lg transition-[transform,box-shadow] duration-200 hover:-translate-y-1 border-border h-full">
-                    <div className="icon-circle-sm mb-4">
-                      <Icon size={28} weight="duotone" className="text-accent" />
+                  <Card className="p-6 hover:shadow-lg transition-[transform,box-shadow] duration-200 hover:-translate-y-1 border-border h-full service-card group flex flex-col">
+                    <div className="icon-circle-md mb-4">
+                      <Icon size={32} weight="duotone" className="text-accent" />
                     </div>
-                    <h3 className="font-[family-name:var(--font-space)] font-semibold text-xl mb-2 text-foreground">
+                    <h3 className="font-[family-name:var(--font-space)] font-bold text-xl mb-2 text-foreground">
                       {service.title}
                     </h3>
-                    <p className="text-muted-foreground leading-relaxed">
+                    <p className="text-muted-foreground leading-relaxed flex-1">
                       {service.description}
                     </p>
+                    <div className="flex items-center gap-1.5 text-accent text-sm font-[family-name:var(--font-space)] font-semibold mt-4 opacity-0 group-hover:opacity-100 transition-opacity duration-200">
+                      <span>Learn more</span>
+                      <ArrowRight size={14} weight="bold" />
+                    </div>
                   </Card>
                 </motion.div>
               )
@@ -250,19 +303,25 @@ function App() {
         </div>
       </section>
 
-      <section className="py-16 md:py-24 px-6 bg-muted/30">
+      <section id="why-us" className="py-16 md:py-24 px-6 bg-background">
         <div className="max-w-7xl mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5 }}
-            className="text-center space-y-4 mb-12 md:mb-16"
+            className="text-center mb-12 md:mb-16"
           >
+            <div className="flex items-center justify-center mb-4">
+              <div className="w-12 h-12 rounded-full bg-accent flex items-center justify-center">
+                <CheckCircle size={22} weight="duotone" className="text-accent-foreground" />
+              </div>
+            </div>
             <h2 className="font-[family-name:var(--font-space)] font-bold text-3xl md:text-4xl text-foreground tracking-tight">
               Why Choose Us
             </h2>
-            <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
+            <span className="section-header-line"></span>
+            <p className="text-muted-foreground text-lg max-w-2xl mx-auto mt-4">
               Experience the difference with our professional mobile mechanic services
             </p>
           </motion.div>
@@ -278,11 +337,14 @@ function App() {
                   viewport={{ once: true }}
                   transition={{ duration: 0.5, delay: index * 0.1 }}
                 >
-                  <Card className="p-6 text-center h-full hover:shadow-md transition-[transform,box-shadow] duration-200 hover:-translate-y-1">
+                  <Card className="p-6 text-center h-full hover:shadow-md transition-[transform,box-shadow] duration-200 hover:-translate-y-1 relative overflow-hidden">
+                    <span className="absolute top-3 right-4 font-[family-name:var(--font-space)] font-bold text-4xl text-muted-foreground/12 leading-none select-none pointer-events-none">
+                      {String(index + 1).padStart(2, '0')}
+                    </span>
                     <div className="icon-circle-md mx-auto mb-4">
                       <Icon size={32} weight="duotone" className="text-accent" />
                     </div>
-                    <h3 className="font-[family-name:var(--font-space)] font-semibold text-lg mb-2 text-foreground">
+                    <h3 className="font-[family-name:var(--font-space)] font-bold text-lg mb-2 text-foreground">
                       {benefit.title}
                     </h3>
                     <p className="text-muted-foreground text-sm leading-relaxed">
@@ -298,77 +360,78 @@ function App() {
 
       <Separator />
 
-      <section id="gallery" className="py-16 md:py-24 px-6">
+      <section id="gallery" className="py-16 md:py-24 px-6 bg-muted/30">
         <div className="max-w-7xl mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5 }}
-            className="text-center space-y-4 mb-12 md:mb-16"
+            className="text-center mb-12 md:mb-16"
           >
-            <div className="flex items-center justify-center gap-3">
-              <Images size={32} weight="duotone" className="text-accent" />
+            <div className="flex items-center justify-center mb-4">
+              <div className="w-12 h-12 rounded-full bg-accent flex items-center justify-center">
+                <Images size={24} weight="duotone" className="text-accent-foreground" />
+              </div>
             </div>
             <h2 className="font-[family-name:var(--font-space)] font-bold text-3xl md:text-4xl text-foreground tracking-tight">
               Our Work Gallery
             </h2>
-            <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
+            <span className="section-header-line"></span>
+            <p className="text-muted-foreground text-lg max-w-2xl mx-auto mt-4">
               Take a look at some of our recent repair and maintenance projects
             </p>
           </motion.div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
-            {galleryImages.map((item, index) => (
-              <motion.div
-                key={item.id}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-              >
-                <Dialog>
-                  <DialogTrigger asChild>
-                    <Card 
-                      className="overflow-hidden cursor-pointer group border-border hover:shadow-xl transition-all duration-300 hover:-translate-y-1"
-                      onClick={() => setSelectedImage(item)}
-                    >
-                      <div className="relative aspect-[4/3] overflow-hidden bg-muted">
-                        <img 
-                          src={item.image} 
-                          alt={item.title}
-                          className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-                        />
-                        <div className="absolute inset-0 bg-gradient-to-t from-foreground/80 via-foreground/20 to-transparent opacity-60 group-hover:opacity-80 transition-opacity duration-300" />
+            {galleryImages.map((item, index) => {
+              const GalleryIcon = galleryIconMap[item.category] || Wrench
+              return (
+                <motion.div
+                  key={item.id}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.5, delay: index * 0.1 }}
+                >
+                  <Dialog>
+                    <DialogTrigger asChild>
+                      <Card 
+                        className="overflow-hidden cursor-pointer group border-border hover:shadow-xl transition-all duration-300 hover:-translate-y-1"
+                        onClick={() => setSelectedImage(item)}
+                      >
+                        <div className="gallery-placeholder relative aspect-[4/3] overflow-hidden">
+                          <div className="absolute inset-0 flex items-center justify-center">
+                            <GalleryIcon size={80} weight="duotone" className="text-white/20 group-hover:scale-110 transition-transform duration-500" aria-hidden="true" />
+                          </div>
+                          <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/20 to-transparent" />
+                          <div className="absolute top-4 right-4">
+                            <Badge className="bg-accent text-accent-foreground border-0 font-[family-name:var(--font-space)] font-semibold">
+                              {item.category}
+                            </Badge>
+                          </div>
+                          <div className="absolute bottom-0 left-0 right-0 p-4 text-white">
+                            <h3 className="font-[family-name:var(--font-space)] font-bold text-lg mb-1">
+                              {item.title}
+                            </h3>
+                            <p className="text-sm text-white/90 line-clamp-2">
+                              {item.description}
+                            </p>
+                          </div>
+                        </div>
+                      </Card>
+                    </DialogTrigger>
+                    <DialogContent className="max-w-4xl p-0 overflow-hidden border-border">
+                      <div className="gallery-placeholder relative w-full h-64 md:h-80">
+                        <div className="absolute inset-0 flex items-center justify-center">
+                          <GalleryIcon size={100} weight="duotone" className="text-white/25" aria-hidden="true" />
+                        </div>
                         <div className="absolute top-4 right-4">
-                          <Badge className="bg-accent text-accent-foreground border-0 font-[family-name:var(--font-space)] font-semibold">
+                          <Badge className="bg-accent text-accent-foreground border-0 font-[family-name:var(--font-space)] font-semibold text-base px-4 py-1.5">
                             {item.category}
                           </Badge>
                         </div>
-                        <div className="absolute bottom-0 left-0 right-0 p-4 text-white">
-                          <h3 className="font-[family-name:var(--font-space)] font-bold text-lg mb-1">
-                            {item.title}
-                          </h3>
-                          <p className="text-sm text-white/90 line-clamp-2">
-                            {item.description}
-                          </p>
-                        </div>
                       </div>
-                    </Card>
-                  </DialogTrigger>
-                  <DialogContent className="max-w-4xl p-0 overflow-hidden border-border">
-                    <div className="relative">
-                      <img 
-                        src={item.image} 
-                        alt={item.title}
-                        className="w-full h-auto max-h-[70vh] object-contain bg-muted"
-                      />
-                      <div className="absolute top-4 right-4">
-                        <Badge className="bg-accent text-accent-foreground border-0 font-[family-name:var(--font-space)] font-semibold text-base px-4 py-1.5">
-                          {item.category}
-                        </Badge>
-                      </div>
-                    </div>
                     <div className="p-6 md:p-8">
                       <h3 className="font-[family-name:var(--font-space)] font-bold text-2xl md:text-3xl mb-3 text-foreground">
                         {item.title}
@@ -380,29 +443,33 @@ function App() {
                   </DialogContent>
                 </Dialog>
               </motion.div>
-            ))}
+              )
+            })}
           </div>
         </div>
       </section>
 
       <Separator />
 
-      <section id="testimonials" className="py-16 md:py-24 px-6 bg-muted/30">
+      <section id="testimonials" className="py-16 md:py-24 px-6 bg-background">
         <div className="max-w-7xl mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5 }}
-            className="text-center space-y-4 mb-12 md:mb-16"
+            className="text-center mb-12 md:mb-16"
           >
-            <div className="flex items-center justify-center gap-3">
-              <Quotes size={32} weight="duotone" className="text-accent" />
+            <div className="flex items-center justify-center mb-4">
+              <div className="w-12 h-12 rounded-full bg-accent flex items-center justify-center">
+                <Quotes size={24} weight="duotone" className="text-accent-foreground" />
+              </div>
             </div>
             <h2 className="font-[family-name:var(--font-space)] font-bold text-3xl md:text-4xl text-foreground tracking-tight">
               What Our Customers Say
             </h2>
-            <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
+            <span className="section-header-line"></span>
+            <p className="text-muted-foreground text-lg max-w-2xl mx-auto mt-4">
               Don't just take our word for it - hear from satisfied customers who experienced our service
             </p>
           </motion.div>
@@ -494,7 +561,7 @@ function App() {
 
       <Separator />
 
-      <section id="contact" className="py-16 md:py-24 px-6">
+      <section id="contact" className="py-16 md:py-24 px-6 bg-muted/30">
         <div className="max-w-2xl mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -560,20 +627,61 @@ function App() {
         </div>
       </section>
 
-      <footer className="bg-primary text-primary-foreground py-8 px-6">
-        <div className="max-w-7xl mx-auto text-center">
-          <div className="flex items-center justify-center gap-3 mb-4">
-            <div className="w-10 h-10 rounded-full bg-accent flex items-center justify-center">
-              <Wrench className="text-accent-foreground" size={24} weight="bold" />
+      <footer className="bg-primary text-primary-foreground py-12 px-6">
+        <div className="max-w-7xl mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
+            <div>
+              <div className="flex items-center gap-3 mb-4">
+                <div className="w-10 h-10 rounded-full bg-accent flex items-center justify-center shrink-0">
+                  <Wrench className="text-accent-foreground" size={24} weight="bold" />
+                </div>
+                <div>
+                  <h3 className="font-[family-name:var(--font-space)] font-bold text-lg leading-none">Greenwood's</h3>
+                  <p className="text-xs opacity-90">24 Hour Mobile Mechanic Services</p>
+                </div>
+              </div>
+              <p className="text-sm opacity-70 max-w-xs leading-relaxed">
+                Professional mobile mechanic services available 24/7, right at your location.
+              </p>
             </div>
-            <div className="text-left">
-              <h3 className="font-[family-name:var(--font-space)] font-bold text-lg leading-none">Greenwood's</h3>
-              <p className="text-xs opacity-90">24 Hour Mobile Mechanic Services</p>
+            <div>
+              <h4 className="font-[family-name:var(--font-space)] font-semibold mb-4 text-sm uppercase tracking-wider opacity-90">Quick Links</h4>
+              <ul className="space-y-2">
+                {navLinks.map(link => (
+                  <li key={link.id}>
+                    <button
+                      onClick={() => document.getElementById(link.id)?.scrollIntoView({ behavior: 'smooth' })}
+                      className="text-sm opacity-75 hover:text-accent hover:opacity-100 transition-all font-[family-name:var(--font-space)]"
+                    >
+                      {link.label}
+                    </button>
+                  </li>
+                ))}
+              </ul>
+            </div>
+            <div>
+              <h4 className="font-[family-name:var(--font-space)] font-semibold mb-4 text-sm uppercase tracking-wider opacity-90">Contact Us</h4>
+              <div className="space-y-3">
+                <a href="tel:+17063020163" className="flex items-center gap-2 text-sm opacity-80 hover:text-accent hover:opacity-100 transition-all">
+                  <Phone size={16} weight="fill" />
+                  (706) 302-0163
+                </a>
+                <a href="mailto:greenwoodc233@gmail.com" className="flex items-center gap-2 text-sm opacity-80 hover:text-accent hover:opacity-100 transition-all">
+                  <PaperPlaneRight size={16} weight="fill" />
+                  greenwoodc233@gmail.com
+                </a>
+                <p className="flex items-center gap-2 text-sm opacity-80">
+                  <Clock size={16} weight="fill" />
+                  Available 24/7
+                </p>
+              </div>
             </div>
           </div>
-          <p className="text-sm opacity-80">
-            © {new Date().getFullYear()} Greenwood's Mobile Mechanic Services. All rights reserved.
-          </p>
+          <div className="border-t border-primary-foreground/20 pt-6 text-center">
+            <p className="text-sm opacity-70">
+              © {new Date().getFullYear()} Greenwood's Mobile Mechanic Services. All rights reserved.
+            </p>
+          </div>
         </div>
       </footer>
 
