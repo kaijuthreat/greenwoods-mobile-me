@@ -166,24 +166,26 @@ function App() {
         </div>
       </header>
 
-      <section className="hero-gradient pt-32 pb-20 md:pt-40 md:pb-28 px-6 overflow-hidden">
+      <section className="hero-gradient pt-24 pb-16 md:pt-32 md:pb-24 px-6 overflow-hidden">
         <div className="max-w-7xl mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
-            className="max-w-4xl"
+            className="max-w-4xl space-y-8"
           >
-            <Badge className="mb-6 bg-accent/20 text-accent-foreground border-accent/40 hover:bg-accent/25 font-[family-name:var(--font-space)] font-semibold uppercase tracking-wider">
-              <Clock weight="bold" size={16} className="mr-1.5" />
-              24/7 Available
-            </Badge>
-            <h1 className="font-[family-name:var(--font-space)] font-bold text-4xl md:text-5xl lg:text-6xl text-white leading-none tracking-tight mb-6">
-              Expert Mobile Mechanic Services, Anytime, Anywhere
-            </h1>
-            <p className="text-lg md:text-xl text-white/90 leading-relaxed mb-8 max-w-2xl">
-              Professional automotive repair and maintenance that comes to you. Fast, reliable, and always available when you need us most.
-            </p>
+            <div className="space-y-4">
+              <Badge className="bg-accent/20 text-accent-foreground border-accent/40 hover:bg-accent/25 font-[family-name:var(--font-space)] font-semibold uppercase tracking-wider">
+                <Clock weight="bold" size={16} className="mr-1.5" />
+                24/7 Available
+              </Badge>
+              <h1 className="font-[family-name:var(--font-space)] font-bold text-4xl md:text-5xl lg:text-6xl text-white leading-none tracking-tight">
+                Expert Mobile Mechanic Services, Anytime, Anywhere
+              </h1>
+              <p className="text-lg md:text-xl text-white/90 leading-relaxed max-w-2xl">
+                Professional automotive repair and maintenance that comes to you. Fast, reliable, and always available when you need us most.
+              </p>
+            </div>
             <div className="flex flex-wrap gap-4 items-center">
               <Button onClick={handleCall} size="lg" className="bg-accent hover:bg-accent/90 text-accent-foreground font-[family-name:var(--font-space)] font-bold text-lg tracking-wide uppercase gap-3 hover:scale-105 transition-transform">
                 <Phone weight="bold" size={24} />
@@ -209,9 +211,9 @@ function App() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5 }}
-            className="text-center mb-12"
+            className="text-center space-y-4 mb-12 md:mb-16"
           >
-            <h2 className="font-[family-name:var(--font-space)] font-bold text-3xl md:text-4xl text-foreground mb-4 tracking-tight">
+            <h2 className="font-[family-name:var(--font-space)] font-bold text-3xl md:text-4xl text-foreground tracking-tight">
               Our Services
             </h2>
             <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
@@ -230,7 +232,7 @@ function App() {
                   viewport={{ once: true }}
                   transition={{ duration: 0.5, delay: index * 0.1 }}
                 >
-                  <Card className="p-6 hover:shadow-lg transition-all duration-300 hover:-translate-y-1 border-border h-full">
+                  <Card className="p-6 hover:shadow-lg transition-[transform,box-shadow] duration-200 hover:-translate-y-1 border-border h-full">
                     <div className="icon-circle-sm mb-4">
                       <Icon size={28} weight="duotone" className="text-accent" />
                     </div>
@@ -255,9 +257,9 @@ function App() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5 }}
-            className="text-center mb-12"
+            className="text-center space-y-4 mb-12 md:mb-16"
           >
-            <h2 className="font-[family-name:var(--font-space)] font-bold text-3xl md:text-4xl text-foreground mb-4 tracking-tight">
+            <h2 className="font-[family-name:var(--font-space)] font-bold text-3xl md:text-4xl text-foreground tracking-tight">
               Why Choose Us
             </h2>
             <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
@@ -265,7 +267,7 @@ function App() {
             </p>
           </motion.div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
             {benefits.map((benefit, index) => {
               const Icon = benefit.icon
               return (
@@ -276,7 +278,7 @@ function App() {
                   viewport={{ once: true }}
                   transition={{ duration: 0.5, delay: index * 0.1 }}
                 >
-                  <Card className="p-6 text-center h-full hover:shadow-md transition-shadow duration-300">
+                  <Card className="p-6 text-center h-full hover:shadow-md transition-[transform,box-shadow] duration-200 hover:-translate-y-1">
                     <div className="icon-circle-md mx-auto mb-4">
                       <Icon size={32} weight="duotone" className="text-accent" />
                     </div>
@@ -303,12 +305,12 @@ function App() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5 }}
-            className="text-center mb-12"
+            className="text-center space-y-4 mb-12 md:mb-16"
           >
-            <div className="flex items-center justify-center gap-3 mb-4">
+            <div className="flex items-center justify-center gap-3">
               <Images size={32} weight="duotone" className="text-accent" />
             </div>
-            <h2 className="font-[family-name:var(--font-space)] font-bold text-3xl md:text-4xl text-foreground mb-4 tracking-tight">
+            <h2 className="font-[family-name:var(--font-space)] font-bold text-3xl md:text-4xl text-foreground tracking-tight">
               Our Work Gallery
             </h2>
             <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
@@ -316,7 +318,7 @@ function App() {
             </p>
           </motion.div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
             {galleryImages.map((item, index) => (
               <motion.div
                 key={item.id}
@@ -392,12 +394,12 @@ function App() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5 }}
-            className="text-center mb-12"
+            className="text-center space-y-4 mb-12 md:mb-16"
           >
-            <div className="flex items-center justify-center gap-3 mb-4">
+            <div className="flex items-center justify-center gap-3">
               <Quotes size={32} weight="duotone" className="text-accent" />
             </div>
-            <h2 className="font-[family-name:var(--font-space)] font-bold text-3xl md:text-4xl text-foreground mb-4 tracking-tight">
+            <h2 className="font-[family-name:var(--font-space)] font-bold text-3xl md:text-4xl text-foreground tracking-tight">
               What Our Customers Say
             </h2>
             <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
@@ -493,7 +495,7 @@ function App() {
       <Separator />
 
       <section id="contact" className="py-16 md:py-24 px-6">
-        <div className="max-w-4xl mx-auto">
+        <div className="max-w-2xl mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -501,7 +503,7 @@ function App() {
             transition={{ duration: 0.5 }}
             className="text-center"
           >
-            <h2 className="font-[family-name:var(--font-space)] font-bold text-3xl md:text-4xl text-foreground mb-4 tracking-tight">
+            <h2 className="font-[family-name:var(--font-space)] font-bold text-3xl md:text-4xl text-foreground tracking-tight mb-4">
               Contact Us
             </h2>
             <p className="text-muted-foreground text-lg mb-8">
