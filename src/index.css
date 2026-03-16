@@ -1,67 +1,88 @@
 :root {
-  /* Black background feel */
-  --background: oklch(0.96 0 0);
-  --foreground: oklch(0.12 0 0);
+  /* Rich warm off-white background */
+  --background: #f5f4f0;
+  --foreground: #0a0a0a;
 
-  --card: oklch(1 0 0);
-  --card-foreground: oklch(0.12 0 0);
+  --card: #ffffff;
+  --card-foreground: #0a0a0a;
 
-  --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.12 0 0);
+  --popover: #ffffff;
+  --popover-foreground: #0a0a0a;
 
-  /* Deep forest green as primary (footer, "Why Choose Us" icons) */
-  --primary: oklch(0.22 0.08 145);
-  --primary-foreground: oklch(0.98 0 0);
+  /* Deep forest green as primary (footer, dark sections) */
+  --primary: #0d2a0f;
+  --primary-foreground: #f5f5f5;
 
   /* Lime/yellow-green as secondary */
-  --secondary: oklch(0.88 0.12 130);
-  --secondary-foreground: oklch(0.12 0 0);
+  --secondary: #d4f07a;
+  --secondary-foreground: #0a0a0a;
 
-  --muted: oklch(0.94 0.01 130);
-  --muted-foreground: oklch(0.50 0.02 130);
+  --muted: #eeece6;
+  --muted-foreground: #5a5a5a;
 
-  /* Bright lime green as accent (buttons, badges, CTA elements) */
-  --accent: oklch(0.72 0.20 130);
-  --accent-foreground: oklch(0.08 0 0);
+  /* Bright lime green accent (buttons, badges, CTAs) */
+  --accent: #7bc418;
+  --accent-foreground: #0a0a0a;
 
-  --destructive: oklch(0.55 0.22 25);
-  --destructive-foreground: oklch(0.98 0 0);
+  /* Crimson red — emergency/danger accent */
+  --destructive: #b00000;
+  --destructive-foreground: #ffffff;
 
-  --border: oklch(0.88 0.02 130);
-  --input: oklch(0.88 0.02 130);
-  --ring: oklch(0.72 0.20 130);
+  /* Gold amber highlight */
+  --highlight: #c8960c;
+  --highlight-foreground: #0a0a0a;
 
-  --radius: 0.75rem;
+  /* Silver chrome */
+  --chrome: #9aa3ab;
+  --chrome-foreground: #0a0a0a;
+
+  --border: #d4d0c8;
+  --input: #d4d0c8;
+  --ring: #7bc418;
+
+  --radius: 1rem;
+
+  /* Brand color custom properties */
+  --brand-green-dark: #0d2a0f;
+  --brand-green-mid: #1a4a1e;
+  --brand-lime: #7bc418;
+  --brand-lime-bright: #9ed42a;
+  --brand-red: #b00000;
+  --brand-red-dark: #7a0000;
+  --brand-gold: #c8960c;
+  --brand-silver: #9aa3ab;
+  --brand-black: #0a0a0a;
+  --brand-white: #f5f5f5;
 }
 
 .dark {
-  --background: oklch(0.10 0.02 145);
-  --foreground: oklch(0.95 0 0);
+  --background: #0d2a0f;
+  --foreground: #f5f5f5;
 
-  --card: oklch(0.14 0.02 145);
-  --card-foreground: oklch(0.95 0 0);
+  --card: #152e18;
+  --card-foreground: #f5f5f5;
 
-  --popover: oklch(0.14 0.02 145);
-  --popover-foreground: oklch(0.95 0 0);
+  --popover: #152e18;
+  --popover-foreground: #f5f5f5;
 
-  --primary: oklch(0.55 0.15 145);
-  --primary-foreground: oklch(0.08 0 0);
+  --primary: #7bc418;
+  --primary-foreground: #0a0a0a;
 
-  --secondary: oklch(0.20 0.05 130);
-  --secondary-foreground: oklch(0.90 0 0);
+  --secondary: #1a4a1e;
+  --secondary-foreground: #f5f5f5;
 
-  --muted: oklch(0.18 0.02 130);
-  --muted-foreground: oklch(0.65 0.02 130);
+  --muted: #1a3a1e;
+  --muted-foreground: #9aa3ab;
 
-  --accent: oklch(0.72 0.20 130);
-  --accent-foreground: oklch(0.08 0 0);
+  --accent: #7bc418;
+  --accent-foreground: #0a0a0a;
 
-  --destructive: oklch(0.55 0.22 25);
-  --destructive-foreground: oklch(0.98 0 0);
+  --destructive: #b00000;
+  --destructive-foreground: #ffffff;
 
-  --border: oklch(0.25 0.03 145);
-  --input: oklch(0.25 0.03 145);
-  --ring: oklch(0.72 0.20 130);
+  --border: #2a5e30;
+  --input: #2a5e30;
+  --ring: #7bc418;
 }
 
 @theme {
@@ -97,31 +118,31 @@
 }
 
 .icon-circle-sm {
-  width: 2.5rem;
-  height: 2.5rem;
-  min-width: 2.5rem;
-  min-height: 2.5rem;
+  width: 4rem;
+  height: 4rem;
+  min-width: 4rem;
+  min-height: 4rem;
   border-radius: 9999px;
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: oklch(0.72 0.20 130 / 0.15);
+  background-color: rgba(123, 196, 24, 0.15);
 }
 
 .icon-circle-md {
-  width: 3rem;
-  height: 3rem;
-  min-width: 3rem;
-  min-height: 3rem;
+  width: 5rem;
+  height: 5rem;
+  min-width: 5rem;
+  min-height: 5rem;
   border-radius: 9999px;
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: oklch(0.72 0.20 130 / 0.15);
+  background-color: rgba(123, 196, 24, 0.18);
 }
 
 .hero-gradient {
-  background: linear-gradient(145deg, #081408 0%, #0d2a12 30%, #152e18 60%, #080d08 100%);
+  background: linear-gradient(145deg, #030803 0%, #081408 20%, #0d2a12 50%, #152e18 75%, #080d08 100%);
   position: relative;
   overflow: hidden;
 }
@@ -132,27 +153,46 @@
   inset: 0;
   pointer-events: none;
   background:
-    radial-gradient(ellipse at 25% 55%, rgba(124, 181, 24, 0.10) 0%, transparent 55%),
+    radial-gradient(ellipse at 25% 55%, rgba(123, 196, 24, 0.12) 0%, transparent 50%),
+    radial-gradient(ellipse at 85% 40%, rgba(176, 0, 0, 0.08) 0%, transparent 45%),
     repeating-linear-gradient(
       -45deg,
       transparent,
       transparent 40px,
-      rgba(124, 181, 24, 0.02) 40px,
-      rgba(124, 181, 24, 0.02) 80px
+      rgba(123, 196, 24, 0.02) 40px,
+      rgba(123, 196, 24, 0.02) 80px
     );
 }
 
+.hero-glow-red {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 40%;
+  height: 100%;
+  background: radial-gradient(ellipse at 80% 50%, rgba(176, 0, 0, 0.12) 0%, transparent 65%);
+  pointer-events: none;
+}
+
 .section-header-line {
-  width: 3rem;
-  height: 3px;
-  background-color: var(--color-accent);
+  width: 5rem;
+  height: 4px;
+  background-color: var(--accent);
   border-radius: 9999px;
   display: block;
   margin: 0.75rem auto 0;
 }
 
 .service-card {
-  border-left: 4px solid var(--color-accent);
+  border-left: 4px solid var(--accent);
+}
+
+.service-card.service-card-red {
+  border-left: 4px solid #b00000;
+}
+
+.gold-star {
+  color: #c8960c;
 }
 
 .stat-pill {
@@ -170,9 +210,34 @@
 }
 
 .gallery-placeholder {
-  background: linear-gradient(135deg, oklch(0.20 0.08 145) 0%, oklch(0.28 0.12 148) 60%, oklch(0.18 0.06 130) 100%);
+  background: linear-gradient(135deg, #0d2a12 0%, #1a4a1e 50%, #152010 75%, #1a0808 100%);
   position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+.gallery-placeholder-red {
+  background: linear-gradient(135deg, #0d2a12 0%, #1a2a1a 40%, #2a1010 70%, #1a0808 100%);
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.benefit-card-accent {
+  border: 1px solid #2a5e30;
+  background: linear-gradient(135deg, #152e18 0%, #1a3a1e 100%);
+  position: relative;
+}
+
+.benefit-card-accent::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, #7bc418, #9ed42a, #7bc418);
+  border-radius: 9999px 9999px 0 0;
 }
