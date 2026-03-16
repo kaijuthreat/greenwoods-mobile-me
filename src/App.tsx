@@ -3,7 +3,6 @@ import { Phone, Wrench, Clock, MapPin, Lightning, CheckCircle, Gauge, Drop, Batt
 import { Button } from '@/components/ui/button'
 import { Card } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
-import { Separator } from '@/components/ui/separator'
 import { Dialog, DialogContent, DialogTrigger } from '@/components/ui/dialog'
 import { Avatar, AvatarFallback } from '@/components/ui/avatar'
 import { useState } from 'react'
@@ -275,7 +274,7 @@ function App() {
             </p>
           </motion.div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 items-stretch">
             {services.map((service, index) => {
               const Icon = service.icon
               const isEmergency = service.title === 'Emergency Repairs'
@@ -340,16 +339,14 @@ function App() {
                   viewport={{ once: true }}
                   transition={{ duration: 0.5, delay: index * 0.1 }}
                 >
-                  <div className="benefit-card-accent p-6 md:p-8 rounded-xl hover:shadow-2xl hover:shadow-black/40 transition-[transform,box-shadow] duration-200 hover:-translate-y-1 h-full">
-                    <div className="flex flex-col items-start gap-4 mb-4">
-                      <div className="icon-circle-md shrink-0 bg-[#7bc418]/20">
-                        <Icon size={24} weight="duotone" className="text-[#7bc418]" />
-                      </div>
-                      <h3 className="font-[family-name:var(--font-space)] font-bold text-lg text-white leading-tight">
-                        {benefit.title}
-                      </h3>
+                  <div className="benefit-card hover:shadow-2xl hover:shadow-black/40 transition-[transform,box-shadow] duration-200 hover:-translate-y-1">
+                    <div className="icon-circle-md mx-auto mb-5 bg-[#7bc418]/20">
+                      <Icon size={28} weight="duotone" className="text-[#7bc418]" />
                     </div>
-                    <p className="text-white/70 text-sm leading-relaxed">
+                    <h3 className="font-[family-name:var(--font-space)] font-bold text-lg text-white mt-2 mb-3">
+                      {benefit.title}
+                    </h3>
+                    <p className="text-sm text-white/75 leading-relaxed flex-1">
                       {benefit.description}
                     </p>
                   </div>
@@ -396,19 +393,19 @@ function App() {
                         className={`overflow-hidden cursor-pointer group border-border hover:shadow-xl transition-all duration-300 hover:-translate-y-1 hover:border-[#c8960c]`}
                         onClick={() => setSelectedImage(item)}
                       >
-                        <div className={`${isOdd ? 'gallery-placeholder-red' : 'gallery-placeholder'} relative min-h-[280px] aspect-[16/10] overflow-hidden`}>
+                        <div className={`${isOdd ? 'gallery-placeholder-red' : 'gallery-placeholder'} relative aspect-[16/9] overflow-hidden`}>
                           <div className="absolute inset-0 z-0 flex items-center justify-center">
                             <GalleryIcon size={80} weight="duotone" className="text-white/15 group-hover:scale-110 transition-transform duration-500" aria-hidden="true" />
                           </div>
-                          <div className="absolute inset-0 z-10 bg-gradient-to-t from-black/85 via-black/20 to-transparent" />
-                          <div className="absolute top-3 right-3 z-20">
+                          <div className="absolute inset-0 z-10 bg-gradient-to-t from-black/90 via-black/30 to-transparent pointer-events-none" />
+                          <div className="absolute top-3 right-3 z-30">
                             <Badge 
                               className={`border-0 font-[family-name:var(--font-space)] font-semibold text-xs ${isOdd ? 'bg-[#b00000] text-white' : 'bg-[#7bc418] text-[#0a0a0a]'}`}
                             >
                               {item.category}
                             </Badge>
                           </div>
-                          <div className="absolute bottom-0 left-0 right-0 z-20 p-4 text-white">
+                          <div className="absolute bottom-0 left-0 right-0 z-20 p-4 pb-5 text-white">
                             <h3 className="font-[family-name:var(--font-space)] font-bold text-base mb-0.5 leading-tight">
                               {item.title}
                             </h3>
@@ -481,7 +478,7 @@ function App() {
                   viewport={{ once: true }}
                   transition={{ duration: 0.5, delay: index * 0.1 }}
                 >
-                  <Card className="p-6 md:p-8 hover:shadow-lg transition-all duration-300 hover:-translate-y-1 border-border h-full flex flex-col">
+                  <Card className="p-7 hover:shadow-lg transition-all duration-300 hover:-translate-y-1 border-border h-full flex flex-col">
                     <div className="flex items-start gap-4 mb-4">
                       <Avatar className="w-16 h-16 border-2 border-[#7bc418]/30 shrink-0">
                         <AvatarFallback className="bg-[#0d2a0f] text-[#7bc418] font-[family-name:var(--font-space)] font-bold text-lg">
@@ -503,7 +500,7 @@ function App() {
                       {renderStars(testimonial.rating)}
                     </div>
 
-                    <p className="text-muted-foreground leading-relaxed mb-4 flex-1">
+                    <p className="text-base leading-relaxed text-muted-foreground flex-1 mb-4">
                       "{testimonial.text}"
                     </p>
 
@@ -528,25 +525,19 @@ function App() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0.6 }}
-            className="mt-12 text-center"
           >
-            <div className="inline-flex items-center gap-3 px-6 py-4 bg-card rounded-lg border border-border">
-              <div className="flex items-center gap-2">
-                <div className="flex">
-                  {renderStars(5)}
+            <div className="mt-12 py-8 px-6 bg-[#0d2a0f] rounded-2xl text-white text-center">
+              <div className="flex flex-col sm:flex-row items-center justify-center gap-6">
+                <div className="flex items-center gap-3">
+                  <div className="flex">
+                    {renderStars(5)}
+                  </div>
+                  <span className="text-4xl font-bold text-[#c8960c] ml-2">5.0</span>
                 </div>
-                <span className="font-[family-name:var(--font-space)] font-bold text-2xl text-foreground">
-                  5.0
-                </span>
-              </div>
-              <Separator orientation="vertical" className="h-8" />
-              <div className="text-left">
-                <p className="font-[family-name:var(--font-space)] font-semibold text-foreground">
-                  150+ Happy Customers
-                </p>
-                <p className="text-sm text-muted-foreground">
-                  Average rating from verified reviews
-                </p>
+                <div className="text-left">
+                  <p className="text-xl font-bold text-white">150+ Happy Customers</p>
+                  <p className="text-white/70 text-sm">Average rating from verified reviews</p>
+                </div>
               </div>
             </div>
           </motion.div>
@@ -554,7 +545,7 @@ function App() {
       </section>
 
       <section id="contact" className="py-24 md:py-32 px-6 bg-stone-50">
-        <div className="max-w-2xl mx-auto">
+        <div className="max-w-5xl mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -592,8 +583,8 @@ function App() {
               </div>
             </div>
 
-            <Card className="p-8 md:p-12 border-border">
-              <div className="grid md:grid-cols-2 gap-8 text-center md:text-left">
+            <Card className="p-8 md:p-10 border-border w-full">
+              <div className="grid md:grid-cols-3 gap-8 text-center md:text-left">
                 <div>
                   <h4 className="font-[family-name:var(--font-space)] font-semibold text-lg mb-2 text-foreground">
                     Email
@@ -603,6 +594,17 @@ function App() {
                     className="text-muted-foreground hover:text-accent transition-colors"
                   >
                     greenwoodc233@gmail.com
+                  </a>
+                </div>
+                <div>
+                  <h4 className="font-[family-name:var(--font-space)] font-semibold text-lg mb-2 text-foreground">
+                    Phone
+                  </h4>
+                  <a 
+                    href="tel:+17063020163" 
+                    className="text-[#c8960c] hover:text-[#e0a800] transition-colors font-[family-name:var(--font-space)] font-bold"
+                  >
+                    (706) 302-0163
                   </a>
                 </div>
                 <div>
@@ -619,10 +621,10 @@ function App() {
         </div>
       </section>
 
-      <footer className="bg-[#0d2a0f] text-[#f5f5f5] py-12 px-6">
+      <footer className="bg-[#0d2a0f] text-[#f5f5f5] py-16 px-6">
         {/* Crimson red accent line between logo area and links */}
         <div className="max-w-7xl mx-auto">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-6">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-12 mb-8">
             <div>
               <div className="flex items-center gap-3 mb-4">
                 <div className="w-10 h-10 rounded-full bg-[#152e18] border-2 border-[#7bc418] flex items-center justify-center shrink-0">
