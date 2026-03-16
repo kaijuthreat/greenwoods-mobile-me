@@ -247,14 +247,14 @@ function App() {
         </div>
       </section>
 
-      <section id="services" className="py-20 px-6 bg-muted/30">
+      <section id="services" className="py-20 px-6 bg-muted/40">
         <div className="max-w-7xl mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5 }}
-            className="text-center mb-12 md:mb-16"
+            className="text-center mb-10"
           >
             <h2 className="font-[family-name:var(--font-space)] font-bold text-3xl md:text-4xl text-foreground tracking-tight">
               Our Services
@@ -265,7 +265,7 @@ function App() {
             </p>
           </motion.div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
             {services.map((service, index) => {
               const Icon = service.icon
               return (
@@ -279,7 +279,7 @@ function App() {
                   <Card className="p-5 hover:shadow-lg transition-[transform,box-shadow] duration-200 hover:-translate-y-1 border-border h-full service-card group flex flex-col">
                     <div className="flex items-center gap-3 mb-3">
                       <div className="icon-circle-sm shrink-0">
-                        <Icon size={22} weight="duotone" className="text-accent" />
+                        <Icon size={18} weight="duotone" className="text-accent" />
                       </div>
                       <h3 className="font-[family-name:var(--font-space)] font-bold text-lg text-foreground leading-tight">
                         {service.title}
@@ -307,7 +307,7 @@ function App() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5 }}
-            className="text-center mb-12 md:mb-16"
+            className="text-center mb-10"
           >
             <h2 className="font-[family-name:var(--font-space)] font-bold text-3xl md:text-4xl text-foreground tracking-tight">
               Why Choose Us
@@ -318,7 +318,7 @@ function App() {
             </p>
           </motion.div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
             {benefits.map((benefit, index) => {
               const Icon = benefit.icon
               return (
@@ -329,13 +329,10 @@ function App() {
                   viewport={{ once: true }}
                   transition={{ duration: 0.5, delay: index * 0.1 }}
                 >
-                  <Card className="p-5 h-full hover:shadow-md transition-[transform,box-shadow] duration-200 hover:-translate-y-1">
-                    <span className="text-xs font-[family-name:var(--font-space)] font-bold text-muted-foreground/60 uppercase tracking-widest mb-3 block">
-                      {String(index + 1).padStart(2, '0')}
-                    </span>
+                  <Card className="p-5 hover:shadow-md transition-[transform,box-shadow] duration-200 hover:-translate-y-1">
                     <div className="flex items-center gap-3 mb-3">
                       <div className="icon-circle-sm shrink-0">
-                        <Icon size={22} weight="duotone" className="text-accent" />
+                        <Icon size={18} weight="duotone" className="text-accent" />
                       </div>
                       <h3 className="font-[family-name:var(--font-space)] font-bold text-base text-foreground leading-tight">
                         {benefit.title}
@@ -352,16 +349,14 @@ function App() {
         </div>
       </section>
 
-      <Separator />
-
-      <section id="gallery" className="py-20 px-6 bg-muted/30">
+      <section id="gallery" className="py-20 px-6 bg-muted/40">
         <div className="max-w-7xl mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5 }}
-            className="text-center mb-12 md:mb-16"
+            className="text-center mb-10"
           >
             <h2 className="font-[family-name:var(--font-space)] font-bold text-3xl md:text-4xl text-foreground tracking-tight">
               Our Work Gallery
@@ -372,7 +367,7 @@ function App() {
             </p>
           </motion.div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
             {galleryImages.map((item, index) => {
               const GalleryIcon = galleryIconMap[item.category] || Wrench
               return (
@@ -389,21 +384,21 @@ function App() {
                         className="overflow-hidden cursor-pointer group border-border hover:shadow-xl transition-all duration-300 hover:-translate-y-1"
                         onClick={() => setSelectedImage(item)}
                       >
-                        <div className="gallery-placeholder relative aspect-[4/3] overflow-hidden">
-                          <div className="absolute inset-0 flex items-center justify-center">
-                            <GalleryIcon size={80} weight="duotone" className="text-white/20 group-hover:scale-110 transition-transform duration-500" aria-hidden="true" />
+                        <div className="gallery-placeholder relative aspect-[16/10] overflow-hidden">
+                          <div className="absolute inset-0 z-0 flex items-center justify-center">
+                            <GalleryIcon size={64} weight="duotone" className="text-white/15 group-hover:scale-110 transition-transform duration-500" aria-hidden="true" />
                           </div>
-                          <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/20 to-transparent" />
-                          <div className="absolute top-4 right-4">
-                            <Badge className="bg-accent text-accent-foreground border-0 font-[family-name:var(--font-space)] font-semibold">
+                          <div className="absolute inset-0 z-10 bg-gradient-to-t from-black/85 via-black/20 to-transparent" />
+                          <div className="absolute top-3 right-3 z-20">
+                            <Badge className="bg-accent text-accent-foreground border-0 font-[family-name:var(--font-space)] font-semibold text-xs">
                               {item.category}
                             </Badge>
                           </div>
-                          <div className="absolute bottom-0 left-0 right-0 p-4 text-white">
-                            <h3 className="font-[family-name:var(--font-space)] font-bold text-lg mb-1">
+                          <div className="absolute bottom-0 left-0 right-0 z-20 p-4 text-white">
+                            <h3 className="font-[family-name:var(--font-space)] font-bold text-base mb-0.5 leading-tight">
                               {item.title}
                             </h3>
-                            <p className="text-sm text-white/90 line-clamp-2">
+                            <p className="text-xs text-white/80 line-clamp-2">
                               {item.description}
                             </p>
                           </div>
@@ -438,8 +433,6 @@ function App() {
         </div>
       </section>
 
-      <Separator />
-
       <section id="testimonials" className="py-20 px-6 bg-background">
         <div className="max-w-7xl mx-auto">
           <motion.div
@@ -447,7 +440,7 @@ function App() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5 }}
-            className="text-center mb-12 md:mb-16"
+            className="text-center mb-10"
           >
             <h2 className="font-[family-name:var(--font-space)] font-bold text-3xl md:text-4xl text-foreground tracking-tight">
               What Our Customers Say
@@ -458,7 +451,7 @@ function App() {
             </p>
           </motion.div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
             {testimonials.map((testimonial, index) => {
               const initials = testimonial.name
                 .split(' ')
@@ -543,9 +536,7 @@ function App() {
         </div>
       </section>
 
-      <Separator />
-
-      <section id="contact" className="py-20 px-6 bg-muted/30">
+      <section id="contact" className="py-20 px-6 bg-muted/40">
         <div className="max-w-2xl mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
