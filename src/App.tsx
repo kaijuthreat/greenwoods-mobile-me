@@ -462,7 +462,7 @@ function App() {
             </p>
           </motion.div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-5 md:gap-6">
             {testimonials.map((testimonial, index) => {
               const initials = testimonial.name
                 .split(' ')
@@ -479,9 +479,9 @@ function App() {
                   transition={{ duration: 0.5, delay: index * 0.1 }}
                 >
                   <Card className="p-7 hover:shadow-lg transition-all duration-300 hover:-translate-y-1 border-border h-full flex flex-col">
-                    <div className="flex items-start gap-4 mb-4">
-                      <Avatar className="w-16 h-16 border-2 border-[#7bc418]/30 shrink-0">
-                        <AvatarFallback className="bg-[#0d2a0f] text-[#7bc418] font-[family-name:var(--font-space)] font-bold text-lg">
+                    <div className="flex items-center gap-4 mb-4">
+                      <Avatar className="w-12 h-12 border-2 border-[#7bc418]/30 shrink-0">
+                        <AvatarFallback className="bg-[#0d2a0f] text-[#7bc418] font-[family-name:var(--font-space)] font-bold text-base">
                           {initials}
                         </AvatarFallback>
                       </Avatar>
@@ -545,7 +545,7 @@ function App() {
       </section>
 
       <section id="contact" className="py-24 md:py-32 px-6 bg-stone-50">
-        <div className="max-w-5xl mx-auto">
+        <div className="max-w-4xl mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -584,7 +584,7 @@ function App() {
             </div>
 
             <Card className="p-8 md:p-10 border-border w-full">
-              <div className="grid md:grid-cols-3 gap-8 text-center md:text-left">
+              <div className="grid md:grid-cols-3 gap-6 text-center md:text-left">
                 <div>
                   <h4 className="font-[family-name:var(--font-space)] font-semibold text-lg mb-2 text-foreground">
                     Email
@@ -621,10 +621,10 @@ function App() {
         </div>
       </section>
 
-      <footer className="bg-[#0d2a0f] text-[#f5f5f5] py-16 px-6">
+      <footer className="bg-[#0d2a0f] text-[#f5f5f5] py-12 md:py-16 px-6">
         {/* Crimson red accent line between logo area and links */}
         <div className="max-w-7xl mx-auto">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-12 mb-8">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12 mb-8">
             <div>
               <div className="flex items-center gap-3 mb-4">
                 <div className="w-10 h-10 rounded-full bg-[#152e18] border-2 border-[#7bc418] flex items-center justify-center shrink-0">
